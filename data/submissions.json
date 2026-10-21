@@ -331,6 +331,35 @@
   ]
  },
  {
+  "slug": "group-anagrams",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun groupAnagrams(strs: Array<String>): List<List<String>> {\n       val groups = HashMap<String, MutableList<String>>()\n\n       for(word in strs){\n        val map = IntArray(26)\n            for (c in word) {\n                map[c - 'a']++\n            }\n\n        val key = map.contentToString()\n\n        groups.getOrPut(key){mutableListOf()}.add(word)\n\n       }\n\n        return groups.values.toList()\n\n    }\n}",
+  "timestamp": 1792600744,
+  "runtime": "23 ms",
+  "memory": "76.4 MB",
+  "questionFrontendId": "49",
+  "title": "Group Anagrams",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
   "slug": "n-queens",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    void solve(int col,vector<string> &board,vector<vector<string>>&ans,\n    vector<int>&leftrow,vector<int>&upperDiagonal,vector<int>&lowerDiagonal,int n)\n    {\n        if(col==n)\n        {\n            ans.push_back(board);\n            return;\n        }\n        for(int row=0;row<n;row++)\n        {\n            if(leftrow[row]==0 && upperDiagonal[n-1+row-col]==0 && lowerDiagonal[row+col]==0)\n            {\n                board[row][col]='Q';\n                leftrow[row]=1;\n                upperDiagonal[n-1+row-col]=1;\n                lowerDiagonal[row+col]=1;\n                solve(col+1,board,ans,leftrow,upperDiagonal,lowerDiagonal,n);\n                board[row][col]='.';\n                leftrow[row]=0;\n                upperDiagonal[n-1+row-col]=0;\n                lowerDiagonal[row+col]=0;              \n            }\n        }\n    }\npublic:\n    vector<vector<string>> solveNQueens(int n) {\n        vector<vector<string>> ans;\n        vector<string> board;\n        string s ( n,'.');\n        for (int i = 0; i < n; ++i) {\n        board.push_back(s);\n        }\n        vector<int> leftrow(n,0),upperDiagonal (2*n-1,0),lowerDiagonal (2*n-1,0);\n        solve(0,board,ans,leftrow,upperDiagonal,lowerDiagonal,n);\n        return ans;\n    }\n};",
