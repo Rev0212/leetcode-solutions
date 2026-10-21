@@ -782,6 +782,31 @@
   ]
  },
  {
+  "slug": "longest-consecutive-sequence",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun longestConsecutive(nums: IntArray): Int {\n        val set = HashSet<Int>()\n\n        for(num in nums){\n            set.add(num)\n        }\n\n        \n        var maxCount = 0\n\n\n        for(num in set){\n            if(!set.contains(num-1)){\n                var current = num\n                var count = 1\n\n                while(set.contains(current + 1)){\n                    count++\n                    current++\n                }\n\n                 maxCount = maxOf(maxCount, count)\n\n            }\n        }\n\n        return maxCount\n\n    }\n}",
+  "timestamp": 1792606188,
+  "runtime": "55 ms",
+  "memory": "123.1 MB",
+  "questionFrontendId": "128",
+  "title": "Longest Consecutive Sequence",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Union-Find",
+    "slug": "union-find"
+   }
+  ]
+ },
+ {
   "slug": "single-number",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    int singleNumber(vector<int>& nums) {\n    int result=0;\n    for(int i=0;i<nums.size();i++) \n    {\n        result=result^nums[i];\n    }  \n    return result;\n    }\n};",
@@ -1318,6 +1343,51 @@
    {
     "name": "String",
     "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "top-k-frequent-elements",
+  "lang": "kotlin",
+  "code": "\nclass Solution {\n    fun topKFrequent(nums: IntArray, k: Int): IntArray {\n        val map = HashMap<Int, Int>()\n\n        for (i in nums) {\n            map[i] = map.getOrDefault(i, 0) + 1\n        }\n\n        val buckets = Array(nums.size + 1) { mutableListOf<Int>() }\n\n        for ((num, freq) in map) {\n            buckets[freq].add(num)\n        }\n\n        val ans = mutableListOf<Int>()\n\n        for (i in buckets.size - 1 downTo 1) {\n            for (num in buckets[i]) {\n                ans.add(num)\n\n                if (ans.size == k) {\n                    return ans.toIntArray()\n                }\n            }\n        }\n\n        return ans.toIntArray()\n    }\n}\n",
+  "timestamp": 1792604213,
+  "runtime": "23 ms",
+  "memory": "62.7 MB",
+  "questionFrontendId": "347",
+  "title": "Top K Frequent Elements",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Divide and Conquer",
+    "slug": "divide-and-conquer"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   },
+   {
+    "name": "Heap (Priority Queue)",
+    "slug": "heap-priority-queue"
+   },
+   {
+    "name": "Bucket Sort",
+    "slug": "bucket-sort"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   },
+   {
+    "name": "Quickselect",
+    "slug": "quickselect"
    }
   ]
  },
