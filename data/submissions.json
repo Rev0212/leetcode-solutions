@@ -1,0 +1,2114 @@
+[
+ {
+  "slug": "two-sum",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        map<int,int>mpp;\n        int remaining;\n        int curr;\n        for(int i=0;i<nums.size();i++)\n        {\n            curr=nums[i];\n            remaining=target-curr;\n            if(mpp.find(remaining) != mpp.end())\n            {\n                return{mpp[remaining],i};\n            }\n            mpp[curr] = i;\n        }\n        return {};\n    }\n};",
+  "timestamp": 1718621034,
+  "runtime": "9 ms",
+  "memory": "13.6 MB",
+  "questionFrontendId": "1",
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   }
+  ]
+ },
+ {
+  "slug": "add-two-numbers",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {\n        val dummy = ListNode(0)\n        var current = dummy\n\n        var p1 = l1\n        var p2 = l2\n        var carry = 0\n\n        while(p1 != null || p2 != null || carry != 0){\n            val x = p1?.`val` ?: 0\n            val y = p2?.`val` ?: 0\n            val sum = x + y + carry\n            carry = sum / 10\n\n            current.next = ListNode(sum % 10)\n            current = current.next!!\n\n            p1 = p1?.next\n            p2 = p2?.next\n\n        }\n\n        return dummy.next\n\n\n    }\n}",
+  "timestamp": 1792519103,
+  "runtime": "4 ms",
+  "memory": "55.8 MB",
+  "questionFrontendId": "2",
+  "title": "Add Two Numbers",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   }
+  ]
+ },
+ {
+  "slug": "palindrome-number",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool isPalindrome(int x) {\n        string num = to_string(x);\n        int i = 0;\n        int j = num.size()-1;\n        while(i<j){\n            if(num[i] != num[j]){\n                return false;\n            }\n            i++;\n            j--;\n        }\n        return true;\n\n    }\n};",
+  "timestamp": 1737916273,
+  "runtime": "5 ms",
+  "memory": "10.9 MB",
+  "questionFrontendId": "9",
+  "title": "Palindrome Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   }
+  ]
+ },
+ {
+  "slug": "longest-common-prefix",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    string longestCommonPrefix(vector<string>& strs) {\n        sort(strs.begin(),strs.end());\n        string first = strs[0];\n        string last = strs[strs.size()-1];\n        int i = 0;\n        while(i<first.size() && i<last.size() && first[i] == last[i]){\n            i++;\n        }\n        string ans;\n        for(int j=0;j<i;j++){\n            ans.push_back(first[j]);\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1738086563,
+  "runtime": "0 ms",
+  "memory": "12.1 MB",
+  "questionFrontendId": "14",
+  "title": "Longest Common Prefix",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Trie",
+    "slug": "trie"
+   }
+  ]
+ },
+ {
+  "slug": "3sum",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<vector<int>> threeSum(vector<int>& nums) {\n        int n = nums.size();\n        vector<vector<int>> ans;\n        sort(nums.begin(),nums.end());\n        for(int i=0;i<n;i++){\n            if( i> 0 && nums[i] == nums[i-1]) continue;\n            int j = i+1;\n            int k = n-1;\n            while(j<k){\n                int target = nums[i]+nums[j]+nums[k];\n                if(target == 0){\n                    ans.push_back({nums[i],nums[j],nums[k]});\n                    \n                    while (j < k && nums[j] == nums[j + 1]) j++;\n                    while (j < k && nums[k] == nums[k - 1]) k--;\n\n                    j++;\n                    k--;\n\n                }\n                \n                else if(target>0){\n                    k--;\n                }\n                else{\n                    j++;\n                }\n            }\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1737261318,
+  "runtime": "56 ms",
+  "memory": "29.1 MB",
+  "questionFrontendId": "15",
+  "title": "3Sum",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "remove-nth-node-from-end-of-list",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {\n        val dummy = ListNode(0)\n        dummy.next = head\n\n        var f: ListNode? = dummy\n        var s: ListNode? = dummy\n\n        repeat(n+1){\n            f = f?.next\n        }\n\n        while(f != null){\n            s = s?.next\n            f = f.next\n        }\n        s?.next = s?.next?.next \n        return dummy.next\n    }\n\n}",
+  "timestamp": 1792570246,
+  "runtime": "0 ms",
+  "memory": "43.5 MB",
+  "questionFrontendId": "19",
+  "title": "Remove Nth Node From End of List",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "valid-parentheses",
+  "lang": "cpp",
+  "code": "#include <stack>\n#include <string>\n\nclass Solution {\npublic:\n    bool isValid(const std::string& s) {\n        std::stack<char> stack;\n\n        for (char ch : s) {\n            if (ch == '(' || ch == '{' || ch == '[') {\n                stack.push(ch);\n            } else if (ch == ')' || ch == '}' || ch == ']') {\n                if (stack.empty()) {\n                    return false;\n                }\n                char top = stack.top();\n                stack.pop();\n                if ((ch == ')' && top != '(') ||\n                    (ch == '}' && top != '{') ||\n                    (ch == ']' && top != '[')) {\n                    return false;\n                }\n            }\n        }\n        return stack.empty();\n    }\n};\n",
+  "timestamp": 1723892356,
+  "runtime": "0 ms",
+  "memory": "7.6 MB",
+  "questionFrontendId": "20",
+  "title": "Valid Parentheses",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Stack",
+    "slug": "stack"
+   },
+   {
+    "name": "Bracket Sequences",
+    "slug": "bracket-sequences"
+   }
+  ]
+ },
+ {
+  "slug": "remove-duplicates-from-sorted-array",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int removeDuplicates(vector<int>& nums) {\n        if (nums.empty()) return 0;\n\n        int j = 0; \n        for (int i = 1; i < nums.size(); i++) {\n            if (nums[i] != nums[j]) {\n                j++; \n                nums[j] = nums[i]; \n            }\n        }\n\n        return j + 1; \n    }\n};\n",
+  "timestamp": 1734016233,
+  "runtime": "1 ms",
+  "memory": "22.6 MB",
+  "questionFrontendId": "26",
+  "title": "Remove Duplicates from Sorted Array",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "remove-element",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int removeElement(vector<int>& nums, int val) {\n        int i =0;\n        int len = 0;\n        for(int j=0;j<nums.size();j++){\n            if(nums[j] !=  val){\n                nums[i] = nums[j];\n                i++;\n                len++;\n            }\n        }\n        return len;\n    }\n};",
+  "timestamp": 1737820726,
+  "runtime": "0 ms",
+  "memory": "11.7 MB",
+  "questionFrontendId": "27",
+  "title": "Remove Element",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "next-permutation",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    void nextPermutation(vector<int>& nums) {\n        int index = -1;\n        for(int i = nums.size() - 2; i >= 0; i--) {\n            if(nums[i] < nums[i + 1]) {\n                index = i;\n                break;\n            }\n        }\n\n        if(index == -1) {\n            reverse(nums.begin(), nums.end());\n            return;\n        }\n\n        for(int i = nums.size() - 1; i > index; i--) {\n            if(nums[i] > nums[index]) { // Corrected the condition here\n                swap(nums[i], nums[index]);\n                break;\n            }\n        }\n\n      \n        reverse(nums.begin() + index + 1, nums.end());\n    }\n};\n",
+  "timestamp": 1737213812,
+  "runtime": "0 ms",
+  "memory": "15.7 MB",
+  "questionFrontendId": "31",
+  "title": "Next Permutation",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "find-first-and-last-position-of-element-in-sorted-array",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> searchRange(vector<int>& nums, int target) {\n        int n = nums.size();\n        if (n == 0) {\n            return {-1, -1};\n        }\n        \n        int first = -1, last = -1;\n    \n        for (int i = 0; i < n; i++) {\n            if (nums[i] == target) {\n                first = i;\n                break;\n            }\n        }\n    \n        if (first == -1) {\n            return {-1, -1};\n        }\n  \n        for (int i = n - 1; i >= 0; i--) {\n            if (nums[i] == target) {\n                last = i;\n                break;\n            }\n        }\n        \n        return {first, last};\n    }\n};\n",
+  "timestamp": 1737899751,
+  "runtime": "0 ms",
+  "memory": "17.6 MB",
+  "questionFrontendId": "34",
+  "title": "Find First and Last Position of Element in Sorted Array",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   }
+  ]
+ },
+ {
+  "slug": "combination-sum",
+  "lang": "cpp",
+  "code": "#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    void generateSubsets(vector<int>& candidates, int index, vector<int>& subsets, vector<vector<int>>& results, int target) {\n        if(index==candidates.size())\n        {\n            if(target==0)\n            {\n                results.push_back(subsets);\n            }\n            return;\n        }\n        if(candidates[index] <= target )\n        {\n        subsets.push_back(candidates[index]);\n        generateSubsets(candidates,index,subsets,results,target-candidates[index]);\n        subsets.pop_back();\n        }\n        generateSubsets(candidates,index+1,subsets,results,target);\n    }\n\npublic:\n    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {\n        vector<int> subsets;\n        vector<vector<int>> results;\n        generateSubsets(candidates, 0, subsets, results, target);\n        return results;\n    }\n};\n",
+  "timestamp": 1716709367,
+  "runtime": "3 ms",
+  "memory": "12.3 MB",
+  "questionFrontendId": "39",
+  "title": "Combination Sum",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Backtracking",
+    "slug": "backtracking"
+   }
+  ]
+ },
+ {
+  "slug": "combination-sum-ii",
+  "lang": "cpp",
+  "code": "#include <vector>\n#include <algorithm>\n\nclass Solution {\nprivate:\n    void generateSubsets(std::vector<int>& nums, int index, std::vector<int>& subsets, std::vector<std::vector<int>>& result, int target, int currentSum) {\n        if (currentSum == target) {\n            result.push_back(subsets);\n            return;\n        }\n        if (index >= nums.size() || currentSum > target) {\n            return;\n        }\n\n        subsets.push_back(nums[index]);\n        currentSum += nums[index];\n        generateSubsets(nums, index + 1, subsets, result, target, currentSum);\n        subsets.pop_back();\n        currentSum -= nums[index];\n\n        while (index + 1 < nums.size() && nums[index] == nums[index + 1]) {\n            index++;\n        }\n\n        generateSubsets(nums, index + 1, subsets, result, target, currentSum);\n    }\n\npublic:\n    std::vector<std::vector<int>> combinationSum2(std::vector<int>& nums, int target) {\n        std::vector<int> subsets;\n        std::vector<std::vector<int>> result;\n\n        \n        std::sort(nums.begin(), nums.end());\n\n        generateSubsets(nums, 0, subsets, result, target, 0);\n        return result;\n    }\n};\n",
+  "timestamp": 1716709410,
+  "runtime": "5 ms",
+  "memory": "12.6 MB",
+  "questionFrontendId": "40",
+  "title": "Combination Sum II",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Backtracking",
+    "slug": "backtracking"
+   }
+  ]
+ },
+ {
+  "slug": "first-missing-positive",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun firstMissingPositive(nums: IntArray): Int {\n        val arr = BooleanArray(nums.size + 1)\n        for(i in nums.indices){\n            if(nums[i] > 0 &&  nums[i] <= nums.size){\n                arr[nums[i]] = true \n            }\n        }\n\n        for(x in 1 until arr.size){\n            if(arr[x] == false){\n                return x\n            }\n        }\n\n        return nums.size + 1\n\n    }\n}",
+  "timestamp": 1788923360,
+  "runtime": "4 ms",
+  "memory": "65.2 MB",
+  "questionFrontendId": "41",
+  "title": "First Missing Positive",
+  "difficulty": "Hard",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   }
+  ]
+ },
+ {
+  "slug": "rotate-image",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    void rotate(vector<vector<int>>& matrix) {\n        int i,j;\n        int n=matrix.size();\n        for(i=0;i<n-1;i++)\n        {\n            for(j=i+1;j<n;j++)\n            {\n                swap(matrix[i][j], matrix[j][i]);\n            }\n        }\n        for(i=0;i<n;i++)\n        {\n            reverse(matrix[i].begin(), matrix[i].end());\n        }\n    }\n};\n",
+  "timestamp": 1718632649,
+  "runtime": "0 ms",
+  "memory": "8.7 MB",
+  "questionFrontendId": "48",
+  "title": "Rotate Image",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Matrix",
+    "slug": "matrix"
+   }
+  ]
+ },
+ {
+  "slug": "n-queens",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    void solve(int col,vector<string> &board,vector<vector<string>>&ans,\n    vector<int>&leftrow,vector<int>&upperDiagonal,vector<int>&lowerDiagonal,int n)\n    {\n        if(col==n)\n        {\n            ans.push_back(board);\n            return;\n        }\n        for(int row=0;row<n;row++)\n        {\n            if(leftrow[row]==0 && upperDiagonal[n-1+row-col]==0 && lowerDiagonal[row+col]==0)\n            {\n                board[row][col]='Q';\n                leftrow[row]=1;\n                upperDiagonal[n-1+row-col]=1;\n                lowerDiagonal[row+col]=1;\n                solve(col+1,board,ans,leftrow,upperDiagonal,lowerDiagonal,n);\n                board[row][col]='.';\n                leftrow[row]=0;\n                upperDiagonal[n-1+row-col]=0;\n                lowerDiagonal[row+col]=0;              \n            }\n        }\n    }\npublic:\n    vector<vector<string>> solveNQueens(int n) {\n        vector<vector<string>> ans;\n        vector<string> board;\n        string s ( n,'.');\n        for (int i = 0; i < n; ++i) {\n        board.push_back(s);\n        }\n        vector<int> leftrow(n,0),upperDiagonal (2*n-1,0),lowerDiagonal (2*n-1,0);\n        solve(0,board,ans,leftrow,upperDiagonal,lowerDiagonal,n);\n        return ans;\n    }\n};",
+  "timestamp": 1711795774,
+  "runtime": "0 ms",
+  "memory": "9.2 MB",
+  "questionFrontendId": "51",
+  "title": "N-Queens",
+  "difficulty": "Hard",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Backtracking",
+    "slug": "backtracking"
+   },
+   {
+    "name": "Algorithm X",
+    "slug": "algorithm-x"
+   }
+  ]
+ },
+ {
+  "slug": "maximum-subarray",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int maxSubArray(std::vector<int>& nums) {\n        int sum = 0;\n        int maxSum= INT_MIN;\n\n        for (int i = 0; i < nums.size(); i++) {\n            sum += nums[i];\n\n            if (sum > maxSum) {\n                maxSum = sum;\n            }\n\n            if (sum < 0) {\n                sum = 0;\n            }\n        }\n\n        return maxSum;\n    }\n};\n",
+  "timestamp": 1709222222,
+  "runtime": "78 ms",
+  "memory": "70.2 MB",
+  "questionFrontendId": "53",
+  "title": "Maximum Subarray",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Divide and Conquer",
+    "slug": "divide-and-conquer"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   }
+  ]
+ },
+ {
+  "slug": "length-of-last-word",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int lengthOfLastWord(string s) {\n        int i = s.size()-1;\n        int len = 0;\n        while(i>=0 && s[i] == ' '){\n            i--;\n        }\n        while(i>= 0 && s[i] != ' '){\n            len++;\n            i--;\n        }\n        return len;\n    }\n};",
+  "timestamp": 1737818977,
+  "runtime": "0 ms",
+  "memory": "8.9 MB",
+  "questionFrontendId": "58",
+  "title": "Length of Last Word",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "length-of-last-word",
+  "lang": "python",
+  "code": "class Solution(object):\n    def lengthOfLastWord(self, s):\n        \"\"\"\n        :type s: str\n        :rtype: int\n        \"\"\"\n        word = s.split()\n        if word:\n            ans = len(word[-1])\n            return ans\n        else:\n            return 0\n\n        ",
+  "timestamp": 1737817983,
+  "runtime": "0 ms",
+  "memory": "12.5 MB",
+  "questionFrontendId": "58",
+  "title": "Length of Last Word",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "unique-paths",
+  "lang": "cpp",
+  "code": "class Solution {\nprivate:\n    int helper(int m,int n,vector<vector<int>>&memo)\n    {\n    \n        // Base cases\n        if (m == 0 && n == 0) {\n            return 1;\n        }\n        if (m < 0 || n < 0) {\n            return 0;\n        }\n        if (memo[m][n] != -1) {\n            return memo[m][n];\n        }\n        \n        \n        int left = helper(m - 1, n,memo);\n        int up = helper(m, n - 1,memo);\n\n        memo[m][n] = left + up;\n        return memo[m][n];\n    }\npublic:\n    int uniquePaths(int m, int n) \n    {   \n        vector<vector<int>> memo(m, vector<int>(n, -1));\n        return helper(m - 1, n - 1,memo);\n    }\n};",
+  "timestamp": 1717165747,
+  "runtime": "4 ms",
+  "memory": "7.7 MB",
+  "questionFrontendId": "62",
+  "title": "Unique Paths",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Combinatorics",
+    "slug": "combinatorics"
+   }
+  ]
+ },
+ {
+  "slug": "unique-paths-ii",
+  "lang": "cpp",
+  "code": "class Solution {\nprivate:\n    int helper(vector<vector<int>>& obstacleGrid, int m, int n,vector<vector<int>>&memo)\n    {\n        // Base case\n        if(m==0 && n==0)\n        {\n            return obstacleGrid[0][0] == 1 ? 0 : 1;  // Check if the start is blocked\n        }\n        if(m<0 || n<0)\n        {\n            return 0;\n        }\n        if(obstacleGrid[m][n] == 1)\n        {\n            return 0;\n        }\n        if(memo[m][n] != -1)\n        {\n            return memo[m][n];\n        }\n         \n        int up = helper(obstacleGrid, m-1, n,memo);\n        int left = helper(obstacleGrid, m, n-1,memo);\n\n        memo[m][n] = left + up;\n        return memo[m][n];\n    }\npublic:\n    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {\n        int m = obstacleGrid.size();\n        int n = obstacleGrid[0].size();\n        vector<vector<int>> memo(m, vector<int>(n, -1));\n        return helper(obstacleGrid, m-1, n-1,memo);\n    }\n};\n",
+  "timestamp": 1717397769,
+  "runtime": "0 ms",
+  "memory": "10.2 MB",
+  "questionFrontendId": "63",
+  "title": "Unique Paths II",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Matrix",
+    "slug": "matrix"
+   }
+  ]
+ },
+ {
+  "slug": "minimum-path-sum",
+  "lang": "cpp",
+  "code": "class Solution {\nprivate:\n    int helper(vector<vector<int>>& grid,int m,int n,vector<vector<int>>&memo)\n    {\n        if(m==0 && n==0)\n        {\n            return grid[m][n];\n        }\n        if(m<0 || n<0)\n        {\n            return INT_MAX;\n        }\n        if(memo[m][n] != -1)\n        {\n            return memo[m][n];\n        }\n        int up = helper(grid,m-1,n,memo);\n        int left = helper(grid,m,n-1,memo);\n        memo[m][n] = grid[m][n] + min(up, left);\n        return memo[m][n];\n    }\npublic:\n    int minPathSum(vector<vector<int>>& grid) {\n        int m = grid.size();\n        int n = grid[0].size();\n        vector<vector<int>> memo (m,vector<int>(n,-1));\n        return helper(grid,m-1,n-1,memo);\n\n    }\n};",
+  "timestamp": 1717399595,
+  "runtime": "7 ms",
+  "memory": "12.6 MB",
+  "questionFrontendId": "64",
+  "title": "Minimum Path Sum",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Matrix",
+    "slug": "matrix"
+   }
+  ]
+ },
+ {
+  "slug": "plus-one",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> plusOne(vector<int>& nums) {\n        int n = nums.size();\n        for(int i=n-1;i>=0;i--){\n            if(nums[i]<9){\n                nums[i]++;\n                return nums;\n            }\n            nums[i] = 0;\n        }\n        nums.insert(nums.begin(),1);\n        return nums;\n    }\n};",
+  "timestamp": 1737915836,
+  "runtime": "0 ms",
+  "memory": "11.6 MB",
+  "questionFrontendId": "66",
+  "title": "Plus One",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   }
+  ]
+ },
+ {
+  "slug": "climbing-stairs",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int climbStairs(int n) {\n        if(n==1)\n        {\n            return 1;\n        }\n        if(n==2)\n        {\n            return 2;\n        }\n        int prev1=2;\n        int prev2=1;\n        int current = 0;\n        for (int i=3;i<=n;i++)\n        {\n            current = prev1+prev2;\n            prev2=prev1;\n            prev1=current;\n        }\n        return current;\n        \n    }\n};",
+  "timestamp": 1716655629,
+  "runtime": "0 ms",
+  "memory": "7.1 MB",
+  "questionFrontendId": "70",
+  "title": "Climbing Stairs",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Memoization",
+    "slug": "memoization"
+   }
+  ]
+ },
+ {
+  "slug": "sort-colors",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        int count0 = 0;\n        int count1 = 0;\n        int count2 = 0;\n\n        for(int i=0;i<nums.size();i++){\n            if(nums[i] == 0){\n                count0++;\n            }\n            else if(nums[i] == 1){\n                count1++;\n            }\n            else{\n                count2++;\n            }\n        }\n\n        int i = 0;\n        for (; i < count0; i++) nums[i] = 0;\n        for (; i < count0 + count1; i++) nums[i] = 1;\n        for (; i < nums.size(); i++) nums[i] = 2;\n        \n    }\n};",
+  "timestamp": 1750266226,
+  "runtime": "0 ms",
+  "memory": "11.4 MB",
+  "questionFrontendId": "75",
+  "title": "Sort Colors",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   },
+   {
+    "name": "Quicksort",
+    "slug": "quicksort"
+   },
+   {
+    "name": "Bubble Sort",
+    "slug": "bubble-sort"
+   }
+  ]
+ },
+ {
+  "slug": "subsets",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\npublic:\n    vector<vector<int>> subsets(vector<int>& nums) {\n        vector<vector<int>> result;\n        vector<int> subset;\n        generatesubset(nums, 0, subset, result);\n        return result;\n    }\n\nprivate:\n    void generatesubset(vector<int>& nums, int index, vector<int>& subset, vector<vector<int>>& result) {\n        // Base case: when index reaches the end of nums\n        if (index == nums.size()) {\n            result.push_back(subset); // Add the current subset to the result\n            return;\n        }\n\n        // Exclude the current element and move to the next index\n        generatesubset(nums, index + 1, subset, result);\n\n        // Include the current element and move to the next index\n        subset.push_back(nums[index]);\n        generatesubset(nums, index + 1, subset, result);\n        subset.pop_back(); // Backtrack: remove the current element to restore the previous state of the subset\n    }\n};",
+  "timestamp": 1711784783,
+  "runtime": "5 ms",
+  "memory": "11 MB",
+  "questionFrontendId": "78",
+  "title": "Subsets",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Backtracking",
+    "slug": "backtracking"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   }
+  ]
+ },
+ {
+  "slug": "remove-duplicates-from-sorted-list",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun deleteDuplicates(head: ListNode?): ListNode? {\n       val dummy = head \n       var p = head\n       \n        while(p != null && p.next != null){\n            if(p.`val` == p.next!!.`val`){\n                p.next = p.next!!.next\n            } else {\n                p = p.next\n            }\n        }\n\n        return dummy\n    }\n}",
+  "timestamp": 1792568668,
+  "runtime": "1 ms",
+  "memory": "46 MB",
+  "questionFrontendId": "83",
+  "title": "Remove Duplicates from Sorted List",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   }
+  ]
+ },
+ {
+  "slug": "merge-sorted-array",
+  "lang": "cpp",
+  "code": "\n\nclass Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) \n    {   \n        int i = m - 1;\n        int j = n - 1;\n        int k = m + n - 1;\n\n        while (i >= 0 && j >= 0) {\n            if (nums1[i] > nums2[j]) {\n                nums1[k--] = nums1[i--];\n            } else {\n                nums1[k--] = nums2[j--];\n            }\n        }\n\n        // If there are remaining elements in nums2, copy them to nums1\n        while (j >= 0) {\n            nums1[k--] = nums2[j--];\n        }\n    }\n};\n",
+  "timestamp": 1709570371,
+  "runtime": "6 ms",
+  "memory": "10.9 MB",
+  "questionFrontendId": "88",
+  "title": "Merge Sorted Array",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "binary-tree-level-order-traversal",
+  "lang": "cpp",
+  "code": "/**\n * Definition for a binary tree node.\n * struct TreeNode {\n *     int val;\n *     TreeNode *left;\n *     TreeNode *right;\n *     TreeNode() : val(0), left(nullptr), right(nullptr) {}\n *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}\n * };\n */\nclass Solution {\npublic:\n    vector<vector<int>> levelOrder(TreeNode * root) {\n        vector<vector<int>> ans;\n        if(root==NULL) return ans;\n        queue<TreeNode*> q;\n        q.push(root);\n        while(!q.empty())\n        {\n            int size = q.size();\n            vector<int> level;\n            for(int i=0;i<size;i++)\n            {\n                TreeNode *node = q.front();\n                q.pop();\n                if(node->left != NULL) q.push(node->left);\n                if(node->right != NULL) q.push(node->right);\n                level.push_back(node->val);    \n            }\n            ans.push_back(level);\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1708666504,
+  "runtime": "0 ms",
+  "memory": "14.9 MB",
+  "questionFrontendId": "102",
+  "title": "Binary Tree Level Order Traversal",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Tree",
+    "slug": "tree"
+   },
+   {
+    "name": "Breadth-First Search",
+    "slug": "breadth-first-search"
+   },
+   {
+    "name": "Binary Tree",
+    "slug": "binary-tree"
+   }
+  ]
+ },
+ {
+  "slug": "binary-tree-level-order-traversal",
+  "lang": "java",
+  "code": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     int val;\n *     TreeNode left;\n *     TreeNode right;\n *     TreeNode() {}\n *     TreeNode(int val) { this.val = val; }\n *     TreeNode(int val, TreeNode left, TreeNode right) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\nclass Solution {\n    public List<List<Integer>> levelOrder(TreeNode root) {\n                List<List<Integer>> ans = new ArrayList<>();\n        if (root == null)\n            return ans;\n        Queue<TreeNode> q = new LinkedList<>();\n        q.offer(root);\n        while (!q.isEmpty()) {\n            int size = q.size();\n            List<Integer> level = new ArrayList<>();\n            for (int i = 0; i < size; i++) {\n                TreeNode node = q.poll();\n                if (node.left != null)\n                    q.offer(node.left);\n                if (node.right != null)\n                    q.offer(node.right);\n                level.add(node.val);\n            }\n            ans.add(level);\n        }\n        return ans;\n\n    }\n}",
+  "timestamp": 1708679027,
+  "runtime": "1 ms",
+  "memory": "44.9 MB",
+  "questionFrontendId": "102",
+  "title": "Binary Tree Level Order Traversal",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Tree",
+    "slug": "tree"
+   },
+   {
+    "name": "Breadth-First Search",
+    "slug": "breadth-first-search"
+   },
+   {
+    "name": "Binary Tree",
+    "slug": "binary-tree"
+   }
+  ]
+ },
+ {
+  "slug": "best-time-to-buy-and-sell-stock",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int maxProfit(vector<int>& prices) {\n        int Profit = 0;\n        int buyday = prices[0];\n        for (int i =1;i<prices.size();i++)\n        {\n           int currentProfit = prices[i]-buyday;\n            Profit = max(Profit,currentProfit);\n            buyday=min(prices[i],buyday);\n        }\n        if(Profit > 0)\n        {\n            return Profit;\n        }\n        else\n        {\n            return 0;\n        }\n    }\n};",
+  "timestamp": 1717078481,
+  "runtime": "98 ms",
+  "memory": "95.9 MB",
+  "questionFrontendId": "121",
+  "title": "Best Time to Buy and Sell Stock",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   }
+  ]
+ },
+ {
+  "slug": "valid-palindrome",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool isPalindrome(string s) {\n            string newS;\n            for (char c : s)\n            {\n                if (isalnum(c)) \n               {\n                newS += tolower(c);\n               } \n            }\n            int left = 0;\n            int right = newS.size()-1;\n            while(left<right)\n            {\n                if(newS[left] != newS[right])\n                {\n                    return false;\n                }\n                right--;\n                left++;\n            }\n            return true;\n\n        }\n};",
+  "timestamp": 1718443737,
+  "runtime": "3 ms",
+  "memory": "9 MB",
+  "questionFrontendId": "125",
+  "title": "Valid Palindrome",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "longest-consecutive-sequence",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int longestConsecutive(vector<int>& nums) {\n         if (nums.empty()) {\n            return 0;\n        }\n        int maxlen=0;\n        int curlen=1;\n        sort(nums.begin(),nums.end());\n        for(int i=0;i<nums.size()-1;i++)\n        {\n            if(nums[i+1] == nums[i]+1)\n            {\n                curlen++;\n            }\n            else if (nums[i+1] == nums[i]) {\n                continue;\n            }\n            else\n            {\n                maxlen = max(maxlen, curlen);\n                curlen =1;\n            }\n        }\n        maxlen = max(maxlen, curlen);\n        return maxlen;\n\n    }\n};",
+  "timestamp": 1718627551,
+  "runtime": "73 ms",
+  "memory": "49.3 MB",
+  "questionFrontendId": "128",
+  "title": "Longest Consecutive Sequence",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Union-Find",
+    "slug": "union-find"
+   }
+  ]
+ },
+ {
+  "slug": "single-number",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int singleNumber(vector<int>& nums) {\n    int result=0;\n    for(int i=0;i<nums.size();i++) \n    {\n        result=result^nums[i];\n    }  \n    return result;\n    }\n};",
+  "timestamp": 1709614206,
+  "runtime": "10 ms",
+  "memory": "19.2 MB",
+  "questionFrontendId": "136",
+  "title": "Single Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   }
+  ]
+ },
+ {
+  "slug": "linked-list-cycle",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\n\nclass Solution {\n    fun hasCycle(head: ListNode?): Boolean {\n        var s = head\n        var f = head\n\n        while(f != null && f?.next != null){\n            s = s?.next \n            f = f.next?.next\n\n            if(s == f){\n                return true\n            }\n\n        }\n\n        return false\n    }\n}",
+  "timestamp": 1792569477,
+  "runtime": "141 ms",
+  "memory": "49.1 MB",
+  "questionFrontendId": "141",
+  "title": "Linked List Cycle",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Floyd's Cycle Finding Algorithm",
+    "slug": "floyds-cycle-finding-algorithm"
+   }
+  ]
+ },
+ {
+  "slug": "reverse-words-in-a-string",
+  "lang": "python",
+  "code": "class Solution(object):\n    def reverseWords(self, s):\n        words=s.split()\n        reversed_words=words[::-1]\n        reversed_string = \" \".join(reversed_words)\n\n        return reversed_string.strip()",
+  "timestamp": 1721707039,
+  "runtime": "17 ms",
+  "memory": "12.2 MB",
+  "questionFrontendId": "151",
+  "title": "Reverse Words in a String",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "majority-element",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int majorityElement(vector<int>& nums) {\n        int n = nums.size();\n        int majorityElement = nums[0];\n        int count = 0;\n        for(int i=0;i<n;i++){\n            if(count == 0){\n                majorityElement = nums[i];\n            }\n            if(majorityElement == nums[i]){\n                count++;\n            }\n            else{\n                count --;\n            }\n        }\n        return majorityElement;\n\n    }\n};",
+  "timestamp": 1737263161,
+  "runtime": "0 ms",
+  "memory": "28.2 MB",
+  "questionFrontendId": "169",
+  "title": "Majority Element",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Divide and Conquer",
+    "slug": "divide-and-conquer"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   },
+   {
+    "name": "Boyer–Moore Majority Vote Algorithm",
+    "slug": "boyer-moore-majority-vote-algorithm"
+   }
+  ]
+ },
+ {
+  "slug": "repeated-dna-sequences",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun findRepeatedDnaSequences(s: String): List<String> {\n    \n        if (s.length < 10) {\n            return emptyList()\n        }\n\n         val map = mutableMapOf<String, Int>()\n         val result =  mutableListOf<String>()\n\n        for(i in 0..s.length - 10){\n            val sequence = s.substring(i, i + 10)\n            map[sequence] = map.getOrDefault(sequence, 0) + 1\n        }\n\n        for ((sequence, count) in map) {\n            if (count > 1) {\n                result.add(sequence)\n            }\n        }\n\n\n        return result\n\n\n    }\n}",
+  "timestamp": 1789806192,
+  "runtime": "404 ms",
+  "memory": "69.4 MB",
+  "questionFrontendId": "187",
+  "title": "Repeated DNA Sequences",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   },
+   {
+    "name": "Rolling Hash",
+    "slug": "rolling-hash"
+   },
+   {
+    "name": "Hash Function",
+    "slug": "hash-function"
+   },
+   {
+    "name": "Z Algorithm",
+    "slug": "z-algorithm"
+   },
+   {
+    "name": "Boyer–Moore String-Search Algorithm",
+    "slug": "boyer-moore-string-search-algorithm"
+   }
+  ]
+ },
+ {
+  "slug": "number-of-islands",
+  "lang": "cpp",
+  "code": "class Solution {\n\npublic:\n    void bfs(int i,int j,int rows, int cols , vector<vector<int>> & visited,vector<vector<char>>& grid ){\n        if(i<0 || i>= rows || j<0 || j>= cols || (visited[i][j] == 1) || grid[i][j] == '0'){\n            return;\n        }\n        visited[i][j] = 1;\n        bfs(i+1,j,rows,cols,visited,grid);\n        bfs(i-1,j,rows,cols,visited,grid);\n        bfs(i,j+1,rows,cols,visited,grid);\n        bfs(i,j-1,rows,cols,visited,grid);\n    }\n\n\npublic:\n    int numIslands(vector<vector<char>>& grid) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        int count = 0;\n        vector<vector<int>> visited (rows,vector<int>(cols,0));\n\n        for(int i=0;i<rows;i++){\n            for(int j=0;j<cols;j++){\n                if(visited[i][j] == 0 && grid[i][j] == '1'){\n                    count++;\n                    bfs(i,j,rows,cols,visited,grid);\n                }\n            }\n        }\n\n        return count;\n    }\n};",
+  "timestamp": 1742179419,
+  "runtime": "33 ms",
+  "memory": "17.3 MB",
+  "questionFrontendId": "200",
+  "title": "Number of Islands",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Depth-First Search",
+    "slug": "depth-first-search"
+   },
+   {
+    "name": "Breadth-First Search",
+    "slug": "breadth-first-search"
+   },
+   {
+    "name": "Union-Find",
+    "slug": "union-find"
+   },
+   {
+    "name": "Matrix",
+    "slug": "matrix"
+   }
+  ]
+ },
+ {
+  "slug": "happy-number",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun isHappy(n: Int): Boolean {\n          var current = n\nval set = mutableSetOf<Int>()\n\nwhile (current != 1) {\n\n    if(set.contains(current)){\n        return false\n    } else{\n        set.add(current)\n    }\n\n    var sum = 0\n\n    while (current > 0) {\n        val digit = current % 10\n        sum += digit * digit\n        current /= 10\n    }\n\n    current = sum\n}\n\nreturn true  \n    }\n}",
+  "timestamp": 1789841302,
+  "runtime": "2 ms",
+  "memory": "41.2 MB",
+  "questionFrontendId": "202",
+  "title": "Happy Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Floyd's Cycle Finding Algorithm",
+    "slug": "floyds-cycle-finding-algorithm"
+   }
+  ]
+ },
+ {
+  "slug": "remove-linked-list-elements",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun removeElements(head: ListNode?, `val`: Int): ListNode? {\n        val dummy = ListNode(0)\n        dummy.next = head\n        var p = dummy\n\n       while (p.next != null) {\n            if (p.next!!.`val` == `val`) {\n                p.next = p.next.next\n            } else {\n                p = p.next\n            }\n        }\n\n        return dummy.next\n    }\n}",
+  "timestamp": 1792567210,
+  "runtime": "2 ms",
+  "memory": "54.2 MB",
+  "questionFrontendId": "203",
+  "title": "Remove Linked List Elements",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   }
+  ]
+ },
+ {
+  "slug": "isomorphic-strings",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun isIsomorphic(s: String, t: String): Boolean {\n        if(s.length != t.length ){\n            return false\n        }\n        val m1 = mutableMapOf<Char, Char>()\n        val m2 = mutableMapOf<Char, Char>()\n\n        for(i in s.indices){\n           val c1 = s[i]\n           val c2 = t[i]\n\n            if(m1.contains(c1) && m1[c1] != c2){\n                return false\n            }\n\n            if(m2.contains(c2) && m2[c2] != c1){\n                return false\n            }\n\n            m1[c1] = c2\n            m2[c2] = c1\n        }\n\n        return true\n    }\n}",
+  "timestamp": 1792522142,
+  "runtime": "28 ms",
+  "memory": "49.1 MB",
+  "questionFrontendId": "205",
+  "title": "Isomorphic Strings",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "reverse-linked-list",
+  "lang": "cpp",
+  "code": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode() : val(0), next(nullptr) {}\n *     ListNode(int x) : val(x), next(nullptr) {}\n *     ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* reverseList(ListNode* head) {\n    stack<int>container;\n    ListNode *temp =head;\n    while(temp != NULL)\n    {\n        container.push(temp->val);\n        temp=temp->next;\n    }\n    temp=head;\n    while(temp != NULL)\n    {\n        temp->val=container.top();\n        container.pop();\n        temp=temp->next;\n    }\n    return head;\n        \n    }\n};",
+  "timestamp": 1708881187,
+  "runtime": "8 ms",
+  "memory": "11.7 MB",
+  "questionFrontendId": "206",
+  "title": "Reverse Linked List",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   }
+  ]
+ },
+ {
+  "slug": "reverse-linked-list",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun reverseList(head: ListNode?): ListNode? {\n        var prev: ListNode? = null\n        var curr = head\n        \n\n        while(curr != null){\n            val next = curr.next\n            curr.next = prev\n            prev = curr\n            curr = next\n        }\n\n        return prev\n\n\n    }\n}",
+  "timestamp": 1792562668,
+  "runtime": "0 ms",
+  "memory": "45.9 MB",
+  "questionFrontendId": "206",
+  "title": "Reverse Linked List",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   }
+  ]
+ },
+ {
+  "slug": "kth-largest-element-in-an-array",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int findKthLargest(vector<int>& nums, int k) {\n        priority_queue<int> pq;\n\n        \n        for (auto num : nums) {\n            pq.push(num);\n        }\n\n       \n        for(int i=0;i<k-1;i++) {\n            pq.pop();\n        }\n\n        \n        return pq.top();\n    }\n};",
+  "timestamp": 1723320130,
+  "runtime": "105 ms",
+  "memory": "64.7 MB",
+  "questionFrontendId": "215",
+  "title": "Kth Largest Element in an Array",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Divide and Conquer",
+    "slug": "divide-and-conquer"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   },
+   {
+    "name": "Heap (Priority Queue)",
+    "slug": "heap-priority-queue"
+   },
+   {
+    "name": "Quickselect",
+    "slug": "quickselect"
+   }
+  ]
+ },
+ {
+  "slug": "contains-duplicate",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun containsDuplicate(nums: IntArray): Boolean {\n        val map = mutableMapOf<Int, Int>()\n        for(i in nums){\n            map[i] = map.getOrDefault(i, 0) + 1\n        }\n        for((i, k) in map){\n            if(k >= 2){\n                return true\n            }\n        }\n        return false\n    }\n}",
+  "timestamp": 1789839235,
+  "runtime": "59 ms",
+  "memory": "64.7 MB",
+  "questionFrontendId": "217",
+  "title": "Contains Duplicate",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "majority-element-ii",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> majorityElement(vector<int>& nums) {\n        int el1 = INT_MIN;\n        int el2 = INT_MIN;\n        int cnt1 = 0,cnt2 = 0;\n        int n = nums.size();\n        int target = n/3;\n        for(int i=0;i<n;i++){\n            if(cnt1 == 0 && el2 != nums[i] ){\n                el1 = nums[i];\n                cnt1++;\n            } \n            else if(cnt2 == 0 && el1 != nums[i]){\n                el2 = nums[i];\n                cnt2++;\n            }\n            else if(nums[i] == el1){\n                cnt1++;\n            }\n            else if(nums[i] == el2){\n                cnt2++;\n            }\n            else{\n            cnt1--;\n            cnt2--;\n            }\n        }\n        vector<int> ans;\n\n        cnt1 = cnt2 = 0;\n        for (int num : nums) {\n            if (num == el1) cnt1++;\n            else if (num == el2) cnt2++;\n        }\n        if (cnt1 > n / 3) ans.push_back(el1);\n        if (cnt2 > n / 3) ans.push_back(el2);\n\n        return ans;\n    }\n};",
+  "timestamp": 1737344422,
+  "runtime": "0 ms",
+  "memory": "19.9 MB",
+  "questionFrontendId": "229",
+  "title": "Majority Element II",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   },
+   {
+    "name": "Boyer–Moore Majority Vote Algorithm",
+    "slug": "boyer-moore-majority-vote-algorithm"
+   }
+  ]
+ },
+ {
+  "slug": "valid-anagram",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool isAnagram(string s, string t) {\n        if(s.length() != t.length())\n        {\n            return false;\n        }\n        int freq[27] = {0};\n\n        for(int i=0;i<s.length();i++)\n        {\n            freq[s[i]-'a']++;\n        }\n        for(int i=0;i<t.length();i++)\n        {\n            freq[t[i]-'a']--;\n        }\n        for(int i=0;i<=26;i++)\n        {\n            if(freq[i] != 0)\n            {\n                return false;\n            }\n        }\n        return true;\n\n    }\n\n};",
+  "timestamp": 1721708677,
+  "runtime": "3 ms",
+  "memory": "8.9 MB",
+  "questionFrontendId": "242",
+  "title": "Valid Anagram",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "valid-anagram",
+  "lang": "python",
+  "code": "class Solution(object):\n    def isAnagram(self, s, t):\n        if(len(s) != len(t)):\n            return False\n        wordS = sorted(s)\n        wordT = sorted(t)\n        for i in range (len(s)):\n            if(wordS[i] != wordT[i]):\n                return False\n        return True\n        \n        ",
+  "timestamp": 1721707706,
+  "runtime": "43 ms",
+  "memory": "14.2 MB",
+  "questionFrontendId": "242",
+  "title": "Valid Anagram",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "missing-number",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int missingNumber(vector<int>& nums) {\n       int n=nums.size();\n        int sum1=(n*(n+1))/2;\n        int sum=0;\n        for(int i=0;i<n;i++)\n        {\n            sum+=nums[i];\n        }\n        return sum1-sum;\n    }\n};",
+  "timestamp": 1709351441,
+  "runtime": "13 ms",
+  "memory": "20.4 MB",
+  "questionFrontendId": "268",
+  "title": "Missing Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "first-bad-version",
+  "lang": "cpp",
+  "code": "// The API isBadVersion is defined for you.\n// bool isBadVersion(int version);\n\nclass Solution {\npublic:\n    int firstBadVersion(int n) {\n        int l = 0;\n        int r = n;\n        while(l<r){\n            int mid = l + (r - l) / 2;\n            bool api = isBadVersion(mid);\n            if(api){\n                r = mid ;\n            }\n            else{\n                l = mid+1;\n            }\n        }\n\n        return r;\n    }\n};",
+  "timestamp": 1737823347,
+  "runtime": "0 ms",
+  "memory": "7.8 MB",
+  "questionFrontendId": "278",
+  "title": "First Bad Version",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Interactive",
+    "slug": "interactive"
+   }
+  ]
+ },
+ {
+  "slug": "move-zeroes",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    void moveZeroes(vector<int>& arr) {\n        int j=-1;\n\t    int i;\n\t    for (i = 0; i <arr.size(); i++) \n\t    {\n            if (arr[i] == 0) \n            {\n            j = i;\n            break;\n            }\n\t    }\n    if(j!= -1)\n    {\n    for (i = j + 1; i < arr.size(); i++) \n    {\n        if (arr[i] != 0) \n        {\n            swap(arr[i],arr[j]);\n            j++;\n        }\n    }\n    }\n    }\n};",
+  "timestamp": 1709398501,
+  "runtime": "17 ms",
+  "memory": "21.7 MB",
+  "questionFrontendId": "283",
+  "title": "Move Zeroes",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "reverse-vowels-of-a-string",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun reverseVowels(s: String): String {\n        val vowles = listOf('a','e','i','o','u','A', 'E','I','O','U')\n        var l = 0\n        var r = s.length - 1\n\n        val arr = s.toCharArray()\n\n        while(l<=r){\n            if(vowles.contains(arr[l]) && vowles.contains(arr[r])){\n                val temp = arr[r]\n                arr[r] = arr[l]\n                arr[l] = temp   \n                r--\n                l++\n            } else if(vowles.contains(arr[l])){\n                r--\n            } else {\n                l++\n            }\n        }\n\n        return String(arr)\n    }\n}",
+  "timestamp": 1788892751,
+  "runtime": "18 ms",
+  "memory": "47 MB",
+  "questionFrontendId": "345",
+  "title": "Reverse Vowels of a String",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "intersection-of-two-arrays",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun intersection(nums1: IntArray, nums2: IntArray): IntArray {\n        val set = mutableSetOf<Int>()\n        for(i in nums1){\n            set.add(i)\n        }\n\n        val res = mutableSetOf<Int>()\n        for(i in nums2){\n            if(set.contains(i)){\n                res.add(i)\n            }\n        }\n\n        return res.toIntArray()\n\n    }\n}",
+  "timestamp": 1789840088,
+  "runtime": "9 ms",
+  "memory": "45 MB",
+  "questionFrontendId": "349",
+  "title": "Intersection of Two Arrays",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "ransom-note",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun canConstruct(ransomNote: String, magazine: String): Boolean {\n\n        val magazineMap = mutableMapOf<Char, Int>()         \n        \n        for(i in magazine){\n            magazineMap[i] = magazineMap.getOrDefault(i, 0) + 1\n        }\n\n        for(i in ransomNote){\n            val count = magazineMap.getOrDefault(i, 0)\n\n            if(count == 0){\n                return false\n            }\n\n            magazineMap[i] = count - 1\n\n            \n        }\n\n        return true\n\n    }\n}\n\n//TC --> O(n+m)",
+  "timestamp": 1789821543,
+  "runtime": "26 ms",
+  "memory": "46.4 MB",
+  "questionFrontendId": "383",
+  "title": "Ransom Note",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   }
+  ]
+ },
+ {
+  "slug": "first-unique-character-in-a-string",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun firstUniqChar(s: String): Int {\n      val map = mutableMapOf<Char, Int>()\n\n      for(i in s){\n        map[i] = map.getOrDefault(i, 0) + 1\n      }\n\n      for(i in s.indices){\n        if(map[s[i]] == 1){\n            return i\n        }\n      }\n\n      return -1\n    }\n\n}",
+  "timestamp": 1789822543,
+  "runtime": "47 ms",
+  "memory": "47.1 MB",
+  "questionFrontendId": "387",
+  "title": "First Unique Character in a String",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Queue",
+    "slug": "queue"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   }
+  ]
+ },
+ {
+  "slug": "find-the-difference",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    char findTheDifference(string s, string t) {  \n        int sum1 = 0;\n        int sum2 = 0;   \n        for(int i=0;i<s.size();i++)\n        {\n            int asciVal = int(s[i]);\n            sum1 += asciVal;\n        }\n        for(int i=0;i<t.size();i++)\n        {\n            int asciVal = int(t[i]);\n            sum2 += asciVal;\n        }\n        int diff = sum2-sum1;\n        return char(diff);\n    }\n};",
+  "timestamp": 1723889317,
+  "runtime": "4 ms",
+  "memory": "8.1 MB",
+  "questionFrontendId": "389",
+  "title": "Find the Difference",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "longest-palindrome",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun longestPalindrome(s: String): Int {\n        val map = mutableMapOf<Char, Int>()\n\n        for (i in s){\n            map[i] = map.getOrDefault(i, 0) + 1\n        }\n\n        var res = 0\n        var hasOdd = false\n\n        for((i, c) in map){\n            if( c % 2 == 0){\n                res += c\n            } else {\n                hasOdd = true\n                res += c - 1\n            } \n        }\n\n        if(hasOdd){\n            res += 1\n        }\n\n        return res\n\n\n    }\n}",
+  "timestamp": 1789823474,
+  "runtime": "9 ms",
+  "memory": "41.7 MB",
+  "questionFrontendId": "409",
+  "title": "Longest Palindrome",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Greedy",
+    "slug": "greedy"
+   }
+  ]
+ },
+ {
+  "slug": "add-two-numbers-ii",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\n\nclass Solution {\n    fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {\n        val s1 = ArrayDeque<Int>()\n        val s2 = ArrayDeque<Int>()\n\n        var p1 = l1\n        var p2 = l2\n\n\n        while (p1 != null) {\n            s1.addLast(p1.`val`)\n            p1 = p1.next\n        }\n\n        while (p2 != null) {\n            s2.addLast(p2.`val`)\n            p2 = p2.next\n        }\n\n        var carry = 0\n        var head: ListNode? = null\n\n        while (s1.isNotEmpty() || s2.isNotEmpty() || carry != 0) {\n            val x = if (s1.isNotEmpty()) s1.removeLast() else 0\n            val y = if (s2.isNotEmpty()) s2.removeLast() else 0\n\n            val sum = x + y + carry\n            carry = sum / 10\n\n            val node = ListNode(sum % 10)\n            node.next = head\n            head = node\n        }\n\n        return head\n    }\n}\n",
+  "timestamp": 1792520655,
+  "runtime": "25 ms",
+  "memory": "64.2 MB",
+  "questionFrontendId": "445",
+  "title": "Add Two Numbers II",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Stack",
+    "slug": "stack"
+   }
+  ]
+ },
+ {
+  "slug": "max-consecutive-ones",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int findMaxConsecutiveOnes(vector<int>& nums) {\n       int maxConsecutiveOnes = 0;\n        int currentConsecutiveOnes = 0;\n        \n        for (int i = 0; i < nums.size(); ++i) {\n            if (nums[i] == 1) {\n                currentConsecutiveOnes++;\n                maxConsecutiveOnes = max(maxConsecutiveOnes, currentConsecutiveOnes);\n            } else {\n                currentConsecutiveOnes = 0;\n            }\n        }\n        \n        return maxConsecutiveOnes;\n    }\n    \n};",
+  "timestamp": 1718525243,
+  "runtime": "33 ms",
+  "memory": "38.4 MB",
+  "questionFrontendId": "485",
+  "title": "Max Consecutive Ones",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   }
+  ]
+ },
+ {
+  "slug": "keyboard-row",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun findWords(words: Array<String>): Array<String> {\n        val rowMap = mutableMapOf<Char, Int>()\n    \n        for(c in \"qwertyuiop\"){\n            rowMap[c] = 1\n        }\n\n        for(c in \"asdfghjkl\"){\n            rowMap[c] = 2\n        }\n\n        for(c in \"zxcvbnm\"){\n            rowMap[c] = 3\n        }\n\n        val result = mutableListOf<String>()\n\n        for(c in words){\n            val lowerWord = c.lowercase()\n            val expectedRow = rowMap[lowerWord[0]]!!\n            var valid = true\n            for(i in lowerWord){\n                if (rowMap[i] != expectedRow) {\n                    valid = false\n                    break\n                }\n            }\n            if(valid){\n                result.add(c)\n            }\n        }\n\n        return result.toTypedArray()\n    }\n}",
+  "timestamp": 1789760890,
+  "runtime": "1 ms",
+  "memory": "40.5 MB",
+  "questionFrontendId": "500",
+  "title": "Keyboard Row",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "fibonacci-number",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int fib(int n) {\n        if (n <= 1) {\n            return n;\n        }\n        \n        int prev1 = 1;\n        int prev2 = 0;\n        int current = 0; \n        \n        for (int i = 2; i <= n; ++i) {\n            current = prev1 + prev2;\n            prev2 = prev1;\n            prev1 = current;\n        }\n        \n        return current;\n    }\n};\n",
+  "timestamp": 1718443015,
+  "runtime": "2 ms",
+  "memory": "7 MB",
+  "questionFrontendId": "509",
+  "title": "Fibonacci Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   },
+   {
+    "name": "Memoization",
+    "slug": "memoization"
+   }
+  ]
+ },
+ {
+  "slug": "number-of-provinces",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int findCircleNum(vector<vector<int>>& adj) {\n        int n = adj.size();\n        int ans = 0;\n        vector<int> visited(n,0);\n        for(int i=0;i<n;i++){\n            if(!visited[i]){\n                ans++;\n                queue<int> q;\n                visited[i] = 1;\n                q.push(i);\n                while(!q.empty()){\n                int curr = q.front();\n                q.pop();\n                    for(int j=0; j<n;j++){\n                            if(adj[curr][j] == 1 && !visited[j]){\n                                q.push(j);\n                                visited[j] = 1;\n                            }\n                    }\n                }\n            }\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1741631936,
+  "runtime": "1 ms",
+  "memory": "19.9 MB",
+  "questionFrontendId": "547",
+  "title": "Number of Provinces",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Depth-First Search",
+    "slug": "depth-first-search"
+   },
+   {
+    "name": "Breadth-First Search",
+    "slug": "breadth-first-search"
+   },
+   {
+    "name": "Union-Find",
+    "slug": "union-find"
+   },
+   {
+    "name": "Graph Theory",
+    "slug": "graph"
+   }
+  ]
+ },
+ {
+  "slug": "find-customer-referee",
+  "lang": "mysql",
+  "code": "select name \nfrom customer\nwhere referee_id <> 2 or referee_id is null",
+  "timestamp": 1705845631,
+  "runtime": "752 ms",
+  "memory": "0.0B",
+  "questionFrontendId": "584",
+  "title": "Find Customer Referee",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Database",
+    "slug": "database"
+   }
+  ]
+ },
+ {
+  "slug": "big-countries",
+  "lang": "mysql",
+  "code": "select name,population,world.area\nfrom world\nwhere world.area >= 3000000 or population >= 25000000",
+  "timestamp": 1705845898,
+  "runtime": "476 ms",
+  "memory": "0.0B",
+  "questionFrontendId": "595",
+  "title": "Big Countries",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Database",
+    "slug": "database"
+   }
+  ]
+ },
+ {
+  "slug": "flood-fill",
+  "lang": "cpp",
+  "code": "class Solution {\n\npublic:\n    void dfs (int i,int j,int rows, int cols, vector<vector<int>>& image , int sourceColor,int color) {\n        if(i<0 || i>= rows || j<0 || j>= cols || image[i][j] != sourceColor)\n            return;\n        image[i][j] = color;\n        dfs(i+1,j,rows,cols,image,sourceColor,color);\n        dfs(i-1,j,rows,cols,image,sourceColor,color);\n        dfs(i,j+1,rows,cols,image,sourceColor,color);\n        dfs(i,j-1,rows,cols,image,sourceColor,color);\n    }\n\npublic:\n    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {\n        int rows = image.size();\n        int cols = image[0].size();\n        int sourceColor = image[sr][sc];\n        \n\n        if(sourceColor == color){\n            return image;\n        }\n        \n        dfs(sr,sc,rows,cols,image,sourceColor,color);\n\n        return image;\n    }\n};",
+  "timestamp": 1742181697,
+  "runtime": "0 ms",
+  "memory": "17.9 MB",
+  "questionFrontendId": "733",
+  "title": "Flood Fill",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Depth-First Search",
+    "slug": "depth-first-search"
+   },
+   {
+    "name": "Breadth-First Search",
+    "slug": "breadth-first-search"
+   },
+   {
+    "name": "Matrix",
+    "slug": "matrix"
+   }
+  ]
+ },
+ {
+  "slug": "jewels-and-stones",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int numJewelsInStones(string jewels, string stones)\n    {\n    unordered_map<char, int> stonemap;\n    for(int i=0;i<stones.size();i++)\n    {\n        stonemap[stones[i]]++;\n    }\n    int jewelCount = 0;\n        for(int i = 0; i < jewels.size(); i++) \n        {\n            if(stonemap.find(jewels[i]) != stonemap.end()) \n            {\n                jewelCount += stonemap[jewels[i]];\n            }\n        }\n         return jewelCount; \n        }\n};",
+  "timestamp": 1709357866,
+  "runtime": "0 ms",
+  "memory": "8.3 MB",
+  "questionFrontendId": "771",
+  "title": "Jewels and Stones",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "rotate-string",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool rotateString(string s, string goal) {\n        if(s.length() != goal.length())\n        {\n            return false;\n        }\n        string doubled = s+s;\n        if( doubled.find(goal) != string::npos)\n        {\n            return true;\n        }\n        return false;\n    }\n};",
+  "timestamp": 1721710748,
+  "runtime": "0 ms",
+  "memory": "7.6 MB",
+  "questionFrontendId": "796",
+  "title": "Rotate String",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "String Matching",
+    "slug": "string-matching"
+   }
+  ]
+ },
+ {
+  "slug": "rotate-string",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun rotateString(s: String, goal: String): Boolean {\n        if(s.length != goal.length){\n            return false\n        }\n\n        val res = s + s\n\n        if(res.contains(goal)){\n            return true\n        }\n\n        return false\n\n    }\n}",
+  "timestamp": 1788680083,
+  "runtime": "8 ms",
+  "memory": "43.4 MB",
+  "questionFrontendId": "796",
+  "title": "Rotate String",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "String Matching",
+    "slug": "string-matching"
+   }
+  ]
+ },
+ {
+  "slug": "most-profit-assigning-work",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit, vector<int>& worker) {\n        vector<pair<int,int>> jobs;\n        for(int i=0;i<difficulty.size();i++)\n        {\n            jobs.push_back({difficulty[i],profit[i]});\n        }\n        sort(jobs.begin(),jobs.end());\n        sort(worker.begin(),worker.end());\n        int maxProfit = 0, result = 0, i = 0;\n        for (int ability : worker) {\n            while (i < jobs.size() && ability >= jobs[i].first) {\n                maxProfit = max(maxProfit, jobs[i].second);\n                ++i;\n            }\n            result += maxProfit;\n        }\n        \n        return result;\n\n    }\n};",
+  "timestamp": 1718681865,
+  "runtime": "60 ms",
+  "memory": "41.2 MB",
+  "questionFrontendId": "826",
+  "title": "Most Profit Assigning Work",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Greedy",
+    "slug": "greedy"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "middle-of-the-linked-list",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun middleNode(head: ListNode?): ListNode? {\n        var slow = head\n        var fast = head\n\n        while(fast != null && fast?.next != null){\n            slow = slow?.next\n            fast = fast.next?.next\n        }\n\n        return slow\n        \n    }\n}",
+  "timestamp": 1792563589,
+  "runtime": "0 ms",
+  "memory": "43.1 MB",
+  "questionFrontendId": "876",
+  "title": "Middle of the Linked List",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   }
+  ]
+ },
+ {
+  "slug": "squares-of-a-sorted-array",
+  "lang": "kotlin",
+  "code": "class Solution {\n     fun sortedSquares(nums: IntArray): IntArray {\n        var ans = IntArray(nums.size) \n        var left = 0;\n        var right = nums.size - 1\n        var pos = nums.size - 1\n\n        while(left<=right){\n            val sqrOfLeft = nums[left] * nums[left]\n            val sqrOfRight = nums[right] * nums[right]\n\n            if(sqrOfLeft > sqrOfRight){\n                ans[pos] = sqrOfLeft\n                left++\n            } else {\n                ans[pos] = sqrOfRight\n                right--\n            }\n            pos--\n        } \n        return ans\n    }\n}",
+  "timestamp": 1788892757,
+  "runtime": "1 ms",
+  "memory": "51.6 MB",
+  "questionFrontendId": "977",
+  "title": "Squares of a Sorted Array",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "article-views-i",
+  "lang": "mysql",
+  "code": "select\ndistinct author_id as id\nfrom Views\nwhere author_id = viewer_id\norder by id",
+  "timestamp": 1705846152,
+  "runtime": "789 ms",
+  "memory": "0.0B",
+  "questionFrontendId": "1148",
+  "title": "Article Views I",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Database",
+    "slug": "database"
+   }
+  ]
+ },
+ {
+  "slug": "find-the-distance-value-between-two-arrays",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {\n        int ans = 0;\n        for(int i=0; i<arr1.size();i++){\n            bool flag = true;\n            for(int j=0;j<arr2.size();j++){\n                int diff = abs(arr1[i] - arr2[j]);\n                if(diff<= d){\n                    flag = false;\n                    break;\n                }\n            }\n            if(flag == true){\n                ans++;\n            }\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1737821768,
+  "runtime": "0 ms",
+  "memory": "16.7 MB",
+  "questionFrontendId": "1385",
+  "title": "Find the Distance Value Between Two Arrays",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ]
+ },
+ {
+  "slug": "merge-in-between-linked-lists",
+  "lang": "cpp",
+  "code": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode() : val(0), next(nullptr) {}\n *     ListNode(int x) : val(x), next(nullptr) {}\n *     ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {\n    \n        // Find the node just before the ath node\n        ListNode* prevA = nullptr;\n        ListNode* curr = list1;\n        for (int i = 0; i < a; ++i) {\n            prevA = curr;\n            curr = curr->next;\n        }\n\n        // Find the node at the bth position\n        ListNode* nodeB = curr;\n        for (int i = a; i < b; ++i) {\n            nodeB = nodeB->next;\n        }\n\n        // Find the tail of list2\n        ListNode* tailList2 = list2;\n        while (tailList2->next) {\n            tailList2 = tailList2->next;\n        }\n\n        // Connect the list before a with list2 and the list after b\n        if (prevA) {\n            prevA->next = list2;\n        } else {\n            list1 = list2;\n        }\n        tailList2->next = nodeB->next;\n\n        return list1;\n    }\n};",
+  "timestamp": 1710936638,
+  "runtime": "164 ms",
+  "memory": "98.1 MB",
+  "questionFrontendId": "1669",
+  "title": "Merge In Between Linked Lists",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   }
+  ]
+ },
+ {
+  "slug": "invalid-tweets",
+  "lang": "mysql",
+  "code": "select tweet_id \nfrom Tweets\nwhere char_length(content) > 15",
+  "timestamp": 1710427751,
+  "runtime": "1110 ms",
+  "memory": "0.0B",
+  "questionFrontendId": "1683",
+  "title": "Invalid Tweets",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Database",
+    "slug": "database"
+   }
+  ]
+ },
+ {
+  "slug": "check-if-array-is-sorted-and-rotated",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool check(vector<int>& nums) {\n    int n = nums.size();\n    if (n <= 1) {\n        return true;\n    }\n    \n    int rotation_point = 0;\n    for (int i = 0; i < n - 1; ++i) {\n        if (nums[i] > nums[i + 1]) {\n            rotation_point = i + 1;\n            break;\n        }\n    }\n    \n    \n    if (rotation_point == 0) {\n        return true;\n    }\n  \n    for (int i = rotation_point; i < n - 1; ++i) {\n        if (nums[i] > nums[i + 1]) {\n            return false;\n        }\n    }\n    \n    if (nums[n - 1] > nums[0]) {\n        return false;\n    }\n    \n    return true;\n}\n};",
+  "timestamp": 1721825356,
+  "runtime": "2 ms",
+  "memory": "10.2 MB",
+  "questionFrontendId": "1752",
+  "title": "Check if Array Is Sorted and Rotated",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   }
+  ]
+ },
+ {
+  "slug": "recyclable-and-low-fat-products",
+  "lang": "mysql",
+  "code": "select product_id\nfrom Products\nwhere low_fats like \"Y\"\nand recyclable like \"Y\"",
+  "timestamp": 1705845292,
+  "runtime": "1186 ms",
+  "memory": "0.0B",
+  "questionFrontendId": "1757",
+  "title": "Recyclable and Low Fat Products",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Database",
+    "slug": "database"
+   }
+  ]
+ },
+ {
+  "slug": "merge-strings-alternately",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    string mergeAlternately(string word1, string word2) {\n        int i=0;\n        int j=0;\n        string ans;\n        while(i<word1.size() && j<word2.size()){\n            ans+=word1[i];\n            ans+=word2[j];\n            i++;\n            j++;\n        }\n        if(word1.size()>word2.size()){\n            for(int k=i;k<word1.size();k++){\n                ans+=word1[k];\n            }\n        }\n        else{\n            for(int k=i;k<word2.size();k++){\n                ans+=word2[k];\n            }\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1737817400,
+  "runtime": "3 ms",
+  "memory": "8.3 MB",
+  "questionFrontendId": "1768",
+  "title": "Merge Strings Alternately",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "concatenation-of-array",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> getConcatenation(vector<int>& nums) {\n        int n = nums.size();\n        int x=2*n;\n        vector<int>ans(2*n);\n        for(int i=0;i<n;i++)\n        {\n            ans[i]=nums[i];\n        }\n        for(int i=n;i<x;i++)\n        {\n            ans[i] = nums[i-n];\n        }\n        return ans;\n    }\n};",
+  "timestamp": 1722773720,
+  "runtime": "9 ms",
+  "memory": "15.2 MB",
+  "questionFrontendId": "1929",
+  "title": "Concatenation of Array",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Simulation",
+    "slug": "simulation"
+   }
+  ]
+ },
+ {
+  "slug": "add-minimum-number-of-rungs",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    int addRungs(vector<int>& rungs, int dist) {\n        int n = rungs.size();\n        int prev = 0;\n        int count =0;\n        for(int i=0;i<n;i++)\n        {\n            int gap = rungs[i] - prev;\n            if(gap > dist)\n            {\n                count += (gap-1)/dist;\n            }\n            prev = rungs[i];\n        }\n        return count;\n    }\n};",
+  "timestamp": 1722775393,
+  "runtime": "78 ms",
+  "memory": "56.9 MB",
+  "questionFrontendId": "1936",
+  "title": "Add Minimum Number of Rungs",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Greedy",
+    "slug": "greedy"
+   }
+  ]
+ },
+ {
+  "slug": "find-greatest-common-divisor-of-array",
+  "lang": "cpp",
+  "code": "class Solution {\nprivate:\n    int hellper(int &small ,int &big)\n    {\n        int rem = big%small;\n        while(rem != 0)\n        {\n        big=small;\n        small=rem;\n        rem = big%small;\n        }\n        return small;\n    }\npublic:\n    int findGCD(vector<int>& nums) {\n        int big=*max_element(nums.begin(),nums.end());\n        int small=*min_element(nums.begin(),nums.end());\n        int ans=hellper(small,big);\n        return ans;\n    }\n};",
+  "timestamp": 1722776107,
+  "runtime": "9 ms",
+  "memory": "15.3 MB",
+  "questionFrontendId": "1979",
+  "title": "Find Greatest Common Divisor of Array",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Number Theory",
+    "slug": "number-theory"
+   },
+   {
+    "name": "Euclidean Algorithm",
+    "slug": "euclidean-algorithm"
+   },
+   {
+    "name": "Greatest Common Divisor",
+    "slug": "greatest-common-divisor"
+   }
+  ]
+ },
+ {
+  "slug": "rearrange-array-elements-by-sign",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    vector<int> rearrangeArray(vector<int>& nums) \n    {\n        vector<int>ans(nums.size());\n        int posIndex=0;\n        int negIndex=1;\n        for(int num:nums )\n        {\n            if(num>0){\n                ans[posIndex] = num;\n                posIndex+=2;\n            }\n            else\n            {\n                ans[negIndex] = num;\n                negIndex +=2;\n            }\n        }\n\n            \n        return ans;\n    }\n};",
+  "timestamp": 1718464876,
+  "runtime": "118 ms",
+  "memory": "126.3 MB",
+  "questionFrontendId": "2149",
+  "title": "Rearrange Array Elements by Sign",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Simulation",
+    "slug": "simulation"
+   }
+  ]
+ },
+ {
+  "slug": "divide-array-into-equal-pairs",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool divideArray(vector<int>& nums) {\n        map<int,int> mpp;\n        for(int i=0;i<nums.size();i++){\n            mpp[nums[i]]++;\n        }\n\n        for (auto k : mpp){\n            if(k.second % 2 != 0){\n                return false;\n                break;\n            }\n        }\n\n        return true;\n    }\n};",
+  "timestamp": 1742188062,
+  "runtime": "4 ms",
+  "memory": "18.2 MB",
+  "questionFrontendId": "2206",
+  "title": "Divide Array Into Equal Pairs",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Bit Manipulation",
+    "slug": "bit-manipulation"
+   },
+   {
+    "name": "Counting",
+    "slug": "counting"
+   }
+  ]
+ },
+ {
+  "slug": "add-two-integers",
+  "lang": "cpp",
+  "code": "class Solution \n{\npublic:\n    int sum(int num1, int num2) \n    {\n         int sum=num1+num2;\n         return sum;\n\n    }\n};",
+  "timestamp": 1689780719,
+  "runtime": "0 ms",
+  "memory": "5.9 MB",
+  "questionFrontendId": "2235",
+  "title": "Add Two Integers",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   }
+  ]
+ },
+ {
+  "slug": "removing-stars-from-a-string",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun removeStars(s: String): String {\n        val stack = ArrayDeque<Char>()\n\n        for (i in s.indices){\n            if(s[i] != '*'){\n                stack.addLast(s[i])\n            } else if(s[i] == '*'){\n                stack.removeLast()\n            }\n        }\n\n        return stack.joinToString(\"\")\n\n\n    }\n}",
+  "timestamp": 1788680570,
+  "runtime": "80 ms",
+  "memory": "50.4 MB",
+  "questionFrontendId": "2390",
+  "title": "Removing Stars From a String",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Stack",
+    "slug": "stack"
+   },
+   {
+    "name": "Simulation",
+    "slug": "simulation"
+   }
+  ]
+ },
+ {
+  "slug": "find-minimum-log-transportation-cost",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    long long minCuttingCost(int n, int m, int k) {\n        long long cost=0;\n        if(k>=n && k>=m){\n            return 0;\n        }\n        if(n>k){\n            cost += 1LL*(n-k)*(k);            \n        }\n        if(m>k){\n             cost += 1LL*(m-k)*(k);            \n        }\n\n        return cost;\n    }\n};",
+  "timestamp": 1748346253,
+  "runtime": "0 ms",
+  "memory": "8.8 MB",
+  "questionFrontendId": "3560",
+  "title": "Find Minimum Log Transportation Cost",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   }
+  ]
+ },
+ {
+  "slug": "resulting-string-after-adjacent-removals",
+  "lang": "cpp",
+  "code": "class Solution {\npublic:\n    bool check(char a, char b){\n        return (abs(a-b) == 1 || (a == 'a' && b =='z') || (a == 'z' && b =='a') );\n    }\n    string resultingString(string s) {\n        string stack;\n        for(auto c:s){\n            if(!stack.empty() && check(stack.back(),c)){\n                stack.pop_back();\n            }\n            else{\n                stack.push_back(c);\n            }\n        }\n\n        return stack;\n    }\n};",
+  "timestamp": 1748348916,
+  "runtime": "52 ms",
+  "memory": "55.3 MB",
+  "questionFrontendId": "3561",
+  "title": "Resulting String After Adjacent Removals",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Stack",
+    "slug": "stack"
+   },
+   {
+    "name": "Simulation",
+    "slug": "simulation"
+   }
+  ]
+ }
+]
