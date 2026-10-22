@@ -63,6 +63,31 @@
   ]
  },
  {
+  "slug": "container-with-most-water",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun maxArea(height: IntArray): Int {\n        var p1 = 0\n        var p2 = height.size - 1\n\n        var best = 0\n\n        while(p1 != p2){\n            val width = p2 - p1\n            val heightMin = minOf(height[p1], height[p2])\n            val area = width * heightMin\n            best = maxOf(area, best)\n\n            if(height[p1] > height[p2]){\n                p2--\n            } else {\n                p1++\n            }\n\n        }\n\n        return best\n\n\n    }\n}",
+  "timestamp": 1792660092,
+  "runtime": "6 ms",
+  "memory": "73.9 MB",
+  "questionFrontendId": "11",
+  "title": "Container With Most Water",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
+   },
+   {
+    "name": "Greedy",
+    "slug": "greedy"
+   }
+  ]
+ },
+ {
   "slug": "longest-common-prefix",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    string longestCommonPrefix(vector<string>& strs) {\n        sort(strs.begin(),strs.end());\n        string first = strs[0];\n        string last = strs[strs.size()-1];\n        int i = 0;\n        while(i<first.size() && i<last.size() && first[i] == last[i]){\n            i++;\n        }\n        string ans;\n        for(int j=0;j<i;j++){\n            ans.push_back(first[j]);\n        }\n        return ans;\n    }\n};",
@@ -586,6 +611,31 @@
   ]
  },
  {
+  "slug": "climbing-stairs",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun climbStairs(n: Int): Int {\n        val dp = IntArray(n+1)\n        \n        if(n<= 1){return n}\n\n        dp[1] = 1 \n        dp[2] = 2\n        for(i in 3..n){\n            dp[i] = dp[i-2] + dp[i-1]\n        }\n\n        return dp[n]\n    }\n}\n\n",
+  "timestamp": 1792682210,
+  "runtime": "0 ms",
+  "memory": "41.6 MB",
+  "questionFrontendId": "70",
+  "title": "Climbing Stairs",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Memoization",
+    "slug": "memoization"
+   }
+  ]
+ },
+ {
   "slug": "sort-colors",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        int count0 = 0;\n        int count1 = 0;\n        int count2 = 0;\n\n        for(int i=0;i<nums.size();i++){\n            if(nums[i] == 0){\n                count0++;\n            }\n            else if(nums[i] == 1){\n                count1++;\n            }\n            else{\n                count2++;\n            }\n        }\n\n        int i = 0;\n        for (; i < count0; i++) nums[i] = 0;\n        for (; i < count0 + count1; i++) nums[i] = 1;\n        for (; i < nums.size(); i++) nums[i] = 2;\n        \n    }\n};",
@@ -742,6 +792,27 @@
   "timestamp": 1717078481,
   "runtime": "98 ms",
   "memory": "95.9 MB",
+  "questionFrontendId": "121",
+  "title": "Best Time to Buy and Sell Stock",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   }
+  ]
+ },
+ {
+  "slug": "best-time-to-buy-and-sell-stock",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun maxProfit(prices: IntArray): Int {\n      if (prices.size < 2) return 0\n\n        var maxProfit = 0\n        var minCostPrice = prices[0]\n\n        for(i in 1 until prices.size){\n            val profit = prices[i] - minCostPrice\n            maxProfit = maxOf(profit, maxProfit)\n            minCostPrice = minOf(prices[i], minCostPrice)\n        }\n\n        return maxProfit\n    }\n}",
+  "timestamp": 1792691101,
+  "runtime": "4 ms",
+  "memory": "117.2 MB",
   "questionFrontendId": "121",
   "title": "Best Time to Buy and Sell Stock",
   "difficulty": "Easy",
@@ -1652,6 +1723,35 @@
   "timestamp": 1718443015,
   "runtime": "2 ms",
   "memory": "7 MB",
+  "questionFrontendId": "509",
+  "title": "Fibonacci Number",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Math",
+    "slug": "math"
+   },
+   {
+    "name": "Dynamic Programming",
+    "slug": "dynamic-programming"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   },
+   {
+    "name": "Memoization",
+    "slug": "memoization"
+   }
+  ]
+ },
+ {
+  "slug": "fibonacci-number",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun fib(n: Int): Int {\n        val dp = IntArray(n+1){-1}\n        if(n<=1){return n}\n        dp[0] = 0\n        dp[1] = 1\n\n        for(i in 2..n){\n            dp[i] = dp[i-2] + dp[i-1]\n        }\n\n        return dp[n]\n    }\n}",
+  "timestamp": 1792681374,
+  "runtime": "57 ms",
+  "memory": "40.6 MB",
   "questionFrontendId": "509",
   "title": "Fibonacci Number",
   "difficulty": "Easy",
