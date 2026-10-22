@@ -159,6 +159,27 @@
   ]
  },
  {
+  "slug": "merge-two-sorted-lists",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {\n        var p1 = list1\n        var p2 = list2 \n        val dummy = ListNode(0)\n        var tail = dummy\n        while(p1 != null && p2 != null){\n            \n            if(p1.`val` <= p2.`val`){\n                tail.next = p1\n                p1 = p1.next\n            } else {\n                tail.next = p2\n                p2 = p2.next\n            }\n\n            tail = tail.next!!\n    }\n    \n    tail.next = p1 ?: p2\n\n    return dummy.next\n}\n}",
+  "timestamp": 1792654713,
+  "runtime": "1 ms",
+  "memory": "45.4 MB",
+  "questionFrontendId": "21",
+  "title": "Merge Two Sorted Lists",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Recursion",
+    "slug": "recursion"
+   }
+  ]
+ },
+ {
   "slug": "remove-duplicates-from-sorted-array",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    int removeDuplicates(vector<int>& nums) {\n        if (nums.empty()) return 0;\n\n        int j = 0; \n        for (int i = 1; i < nums.size(); i++) {\n            if (nums[i] != nums[j]) {\n                j++; \n                nums[j] = nums[i]; \n            }\n        }\n\n        return j + 1; \n    }\n};\n",
@@ -874,6 +895,31 @@
    {
     "name": "String",
     "slug": "string"
+   }
+  ]
+ },
+ {
+  "slug": "intersection-of-two-linked-lists",
+  "lang": "kotlin",
+  "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\n\nclass Solution {\n    fun getIntersectionNode(\n        headA: ListNode?,\n        headB: ListNode?\n    ): ListNode? {\n\n        fun getLength(head: ListNode?): Int {\n            var current = head\n            var length = 0\n\n            while (current != null) {\n                length++\n                current = current.next\n            }\n\n            return length\n        }\n\n        var p1 = headA\n        var p2 = headB\n\n        val lenA = getLength(headA)\n        val lenB = getLength(headB)\n\n        if (lenA > lenB) {\n            repeat(lenA - lenB) {\n                p1 = p1?.next\n            }\n        } else {\n            repeat(lenB - lenA) {\n                p2 = p2?.next\n            }\n        }\n\n        while (p1 != p2) {\n            p1 = p1?.next\n            p2 = p2?.next\n        }\n\n        return p1\n    }\n}",
+  "timestamp": 1792656463,
+  "runtime": "260 ms",
+  "memory": "73.5 MB",
+  "questionFrontendId": "160",
+  "title": "Intersection of Two Linked Lists",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Linked List",
+    "slug": "linked-list"
+   },
+   {
+    "name": "Two Pointers",
+    "slug": "two-pointers"
    }
   ]
  },
