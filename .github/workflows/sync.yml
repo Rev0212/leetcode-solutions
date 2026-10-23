@@ -26,7 +26,7 @@ jobs:
         run: python sync.py
       - name: Commit changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898733+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Rev0212"
+          git config user.email "159606129+Rev0212@users.noreply.github.com"
           git add -A
           git diff --cached --quiet || (git commit -m "Sync LeetCode solutions" && git push)
