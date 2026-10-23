@@ -116,6 +116,7 @@ def fetch():
             "difficulty": meta["difficulty"], "topicTags": meta["topicTags"],
         }
         changed += 1
+    for slug in {v["slug"] for v in have.values() if not v.get("content")}: c = _req("https://leetcode.com/graphql/", session, csrf, {"query": "query q($s:String!){question(titleSlug:$s){content}}", "variables": {"s": slug}})["data"]["question"]["content"] or ""; [v.update(content=c) for v in have.values() if v["slug"] == slug]; time.sleep(0.3)
     save(list(have.values()))
     print(f"fetch: {changed} new/updated solutions")
 
@@ -163,6 +164,7 @@ def build():
         with open(os.path.join(pdir, "README.md"), "w", encoding="utf-8") as f:
             f.write(f"# {q['questionFrontendId']}. {q['title']}\n\n")
             f.write(f"**Difficulty:** {q['difficulty']}  \n**Topics:** {', '.join(tags)}  \n**Link:** {url}\n\n")
+            if q.get("content"): f.write("## Question\n\n" + q["content"].strip() + "\n\n## Solutions\n\n")
             f.write("| Language | File | Runtime | Memory | Accepted |\n|---|---|---|---|---|\n")
             for lang, name, s in langs:
                 when = datetime.fromtimestamp(int(s["timestamp"]), timezone.utc).strftime("%Y-%m-%d")
