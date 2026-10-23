@@ -13,7 +13,7 @@ Layout produced
   <Topic>/<id>-<slug>/README.md        (title, difficulty, all tags, link)
   README.md                            (index grouped by topic)
 
-Each problem lives in the folder of its *primary* (first-listed) LeetCode tag.
+Each problem lives in the folder of its main pattern: the first PRIORITY tag it has (e.g. DP over Array/Math).
 """
 import json
 import os
@@ -28,6 +28,8 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data", "submissions.json")
 MARKER = ".generated"  # topic folders we own carry this file, so rebuilds can clean them safely
+# folder = first of these patterns the problem is tagged with (most specific technique first); falls back to LeetCode's first tag
+PRIORITY = ["Dynamic Programming", "Backtracking", "Graph", "Union Find", "Topological Sort", "Binary Tree", "Tree", "Trie", "Heap (Priority Queue)", "Monotonic Stack", "Stack", "Linked List", "Sliding Window", "Binary Search", "Two Pointers", "Prefix Sum", "Greedy", "Bit Manipulation", "Sorting", "Hash Table", "String", "Math", "Array"]
 
 EXT = {
     "cpp": "cpp", "c": "c", "java": "java", "python": "py", "python3": "py",
@@ -143,7 +145,7 @@ def build():
     for slug, sols in problems.items():
         q = sols[0]
         tags = [t["name"] for t in (q.get("topicTags") or [])] or ["Uncategorized"]
-        topic = folder_name(tags[0])
+        topic = folder_name(next((p for p in PRIORITY if p in tags), tags[0]))
         pid = f"{int(q['questionFrontendId']):04d}" if str(q["questionFrontendId"]).isdigit() else q["questionFrontendId"]
         pdir = os.path.join(ROOT, topic, f"{pid}-{slug}")
         os.makedirs(pdir, exist_ok=True)
