@@ -29,7 +29,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data", "submissions.json")
 MARKER = ".generated"  # topic folders we own carry this file, so rebuilds can clean them safely
 # folder = first of these patterns the problem is tagged with (most specific technique first); falls back to LeetCode's first tag
-PRIORITY = ["Dynamic Programming", "Backtracking", "Graph", "Union Find", "Topological Sort", "Binary Tree", "Tree", "Trie", "Heap (Priority Queue)", "Monotonic Stack", "Stack", "Linked List", "Sliding Window", "Binary Search", "Two Pointers", "Prefix Sum", "Greedy", "Bit Manipulation", "Sorting", "Hash Table", "String", "Math", "Array"]
+PRIORITY = ["Dynamic Programming", "Backtracking", "Graph Theory", "Topological Sort", "Depth-First Search", "Breadth-First Search", "Binary Tree", "Tree", "Trie", "Heap (Priority Queue)", "Monotonic Stack", "Stack", "Linked List", "Sliding Window", "Binary Search", "Two Pointers", "Prefix Sum", "Greedy", "Bit Manipulation", "Sorting", "Hash Table", "Union-Find", "String", "Math", "Array"]
 
 EXT = {
     "cpp": "cpp", "c": "c", "java": "java", "python": "py", "python3": "py",
