@@ -48,6 +48,32 @@
   "content": "<p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum&nbsp;as a linked list.</p>\n\n<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg\" style=\"width: 483px; height: 342px;\" />\n<pre>\n<strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]\n<strong>Output:</strong> [7,0,8]\n<strong>Explanation:</strong> 342 + 465 = 807.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [0], l2 = [0]\n<strong>Output:</strong> [0]\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]\n<strong>Output:</strong> [8,9,9,9,0,0,0,1]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>\n\t<li><code>0 &lt;= Node.val &lt;= 9</code></li>\n\t<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>\n</ul>\n"
  },
  {
+  "slug": "longest-substring-without-repeating-characters",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun lengthOfLongestSubstring(s: String): Int {\n        var longSubsrting = 0\n        var i = 0\n        var j = 0\n\n        var unique = mutableSetOf<Char>()\n\n        while(j < s.length){\n\n            while(i <= j){\n                if(unique.contains(s[j])){\n                unique.remove(s[i])\n                i++ \n            } else {\n                unique.add(s[j])\n                break\n            }\n\n            }\n                val len = j - i + 1\n                longSubsrting = maxOf(len, longSubsrting)\n                j++\n        }\n\n        return longSubsrting\n    }\n}",
+  "timestamp": 1793013387,
+  "runtime": "116 ms",
+  "memory": "93.4 MB",
+  "questionFrontendId": "3",
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>Given a string <code>s</code>, find the length of the <strong>longest</strong> <span data-keyword=\"substring-nonempty\"><strong>substring</strong></span> without duplicate characters.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;abcabcbb&quot;\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The answer is &quot;abc&quot;, with the length of 3. Note that <code>&quot;bca&quot;</code> and <code>&quot;cab&quot;</code> are also correct answers.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;bbbbb&quot;\n<strong>Output:</strong> 1\n<strong>Explanation:</strong> The answer is &quot;b&quot;, with the length of 1.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;pwwkew&quot;\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The answer is &quot;wke&quot;, with the length of 3.\nNotice that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>0 &lt;= s.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>s</code> consists of English letters, digits, symbols and spaces.</li>\n</ul>\n"
+ },
+ {
   "slug": "palindrome-number",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    bool isPalindrome(int x) {\n        string num = to_string(x);\n        int i = 0;\n        int j = num.size()-1;\n        while(i<j){\n            if(num[i] != num[j]){\n                return false;\n            }\n            i++;\n            j--;\n        }\n        return true;\n\n    }\n};",
@@ -1274,6 +1300,36 @@
   "content": "<p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg\" style=\"width: 542px; height: 222px;\" />\n<pre>\n<strong>Input:</strong> head = [1,2,3,4,5]\n<strong>Output:</strong> [5,4,3,2,1]\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg\" style=\"width: 182px; height: 222px;\" />\n<pre>\n<strong>Input:</strong> head = [1,2]\n<strong>Output:</strong> [2,1]\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> head = []\n<strong>Output:</strong> []\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li>The number of nodes in the list is the range <code>[0, 5000]</code>.</li>\n\t<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>\n</ul>\n\n<p>&nbsp;</p>\n<p><strong>Follow up:</strong> A linked list can be reversed either iteratively or recursively. Could you implement both?</p>\n"
  },
  {
+  "slug": "minimum-size-subarray-sum",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun minSubArrayLen(target: Int, nums: IntArray): Int {\n        var i = 0\n        var j = 0\n        var currSum = 0\n        var minLen = Int.MAX_VALUE\n\n        while (j < nums.size) {\n            currSum += nums[j]\n\n            while (currSum >= target) {\n                val len = j - i + 1\n                minLen = minOf(minLen, len)\n\n                currSum -= nums[i]\n                i++\n            }\n\n            j++\n        }\n\n        return if (minLen == Int.MAX_VALUE) 0 else minLen\n    }\n}",
+  "timestamp": 1793000526,
+  "runtime": "2 ms",
+  "memory": "71.2 MB",
+  "questionFrontendId": "209",
+  "title": "Minimum Size Subarray Sum",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   },
+   {
+    "name": "Prefix Sum",
+    "slug": "prefix-sum"
+   }
+  ],
+  "content": "<p>Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, return <em>the <strong>minimal length</strong> of a </em><span data-keyword=\"subarray-nonempty\"><em>subarray</em></span><em> whose sum is greater than or equal to</em> <code>target</code>. If there is no such subarray, return <code>0</code> instead.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> target = 7, nums = [2,3,1,2,4,3]\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> The subarray [4,3] has the minimal length under the problem constraint.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> target = 4, nums = [1,4,4]\n<strong>Output:</strong> 1\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> target = 11, nums = [1,1,1,1,1,1,1,1]\n<strong>Output:</strong> 0\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= target &lt;= 10<sup>9</sup></code></li>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution of which the time complexity is <code>O(n log(n))</code>."
+ },
+ {
   "slug": "house-robber-ii",
   "lang": "kotlin",
   "code": "class Solution {\n    fun rob(nums: IntArray): Int {\n\n        if(nums.size <= 1){\n            return nums[0]\n        }\n\n\n        val lootA = IntArray(nums.size)\n        lootA[0] = nums[0]\n        lootA[1] = maxOf(nums[0], nums[1])\n\n        val lootB = IntArray(nums.size)\n        lootB[0] = 0\n        lootB[1] = nums[1]\n        \n\n        //case1 \n        for(i in 2 until nums.size - 1){\n            lootA[i] = maxOf(lootA[i-1], (nums[i]+lootA[i-2]))\n        }\n\n        //case2\n        for (i in 2 until nums.size){\n            lootB[i] = maxOf(lootB[i-1], (nums[i]+lootB[i-2]))\n        }\n\n        return max(lootB[nums.size-1], lootA[nums.size-2])\n\n\n    }\n}\n\n\n// 2\n// 3\n// 2\n\n// 13\n// 21\n\n// size -> 3\n// index 0 rob -> i cant rob index[2] so i can rob untill index[1] this is size -2 \n\n// inex 1 rob -> i cant rob untill index[2] this is size -1 ",
@@ -1968,6 +2024,28 @@
   "content": "<p>Table: <code>World</code></p>\n\n<pre>\n+-------------+---------+\n| Column Name | Type    |\n+-------------+---------+\n| name        | varchar |\n| continent   | varchar |\n| area        | int     |\n| population  | int     |\n| gdp         | bigint  |\n+-------------+---------+\nname is the primary key (column with unique values) for this table.\nEach row of this table gives information about the name of a country, the continent to which it belongs, its area, the population, and its GDP value.\n</pre>\n\n<p>&nbsp;</p>\n\n<p>A country is <strong>big</strong> if:</p>\n\n<ul>\n\t<li>it has an area of at least&nbsp;three million (i.e., <code>3000000 km<sup>2</sup></code>), or</li>\n\t<li>it has a population of at least&nbsp;twenty-five million (i.e., <code>25000000</code>).</li>\n</ul>\n\n<p>Write a solution to find the name, population, and area of the <strong>big countries</strong>.</p>\n\n<p>Return the result table in <strong>any order</strong>.</p>\n\n<p>The result format is in the following example.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> \nWorld table:\n+-------------+-----------+---------+------------+--------------+\n| name        | continent | area    | population | gdp          |\n+-------------+-----------+---------+------------+--------------+\n| Afghanistan | Asia      | 652230  | 25500100   | 20343000000  |\n| Albania     | Europe    | 28748   | 2831741    | 12960000000  |\n| Algeria     | Africa    | 2381741 | 37100000   | 188681000000 |\n| Andorra     | Europe    | 468     | 78115      | 3712000000   |\n| Angola      | Africa    | 1246700 | 20609294   | 100990000000 |\n+-------------+-----------+---------+------------+--------------+\n<strong>Output:</strong> \n+-------------+------------+---------+\n| name        | population | area    |\n+-------------+------------+---------+\n| Afghanistan | 25500100   | 652230  |\n| Algeria     | 37100000   | 2381741 |\n+-------------+------------+---------+\n</pre>\n"
  },
  {
+  "slug": "maximum-average-subarray-i",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun findMaxAverage(nums: IntArray, k: Int): Double {\n        var sum = nums.take(k).sum()\n        var maxSum = sum\n\n        for (i in k until nums.size) {\n            sum = sum - nums[i - k] + nums[i]\n            maxSum = maxOf(maxSum, sum)\n        }\n\n        return maxSum.toDouble() / k\n    }\n}",
+  "timestamp": 1792997901,
+  "runtime": "42 ms",
+  "memory": "124.6 MB",
+  "questionFrontendId": "643",
+  "title": "Maximum Average Subarray I",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>You are given an integer array <code>nums</code> consisting of <code>n</code> elements, and an integer <code>k</code>.</p>\n\n<p>Find a contiguous subarray whose <strong>length is equal to</strong> <code>k</code> that has the maximum average value and return <em>this value</em>. Any answer with a calculation error less than <code>10<sup>-5</sup></code> will be accepted.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,12,-5,-6,50,3], k = 4\n<strong>Output:</strong> 12.75000\n<strong>Explanation:</strong> Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [5], k = 1\n<strong>Output:</strong> 5.00000\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>n == nums.length</code></li>\n\t<li><code>1 &lt;= k &lt;= n &lt;= 10<sup>5</sup></code></li>\n\t<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>\n</ul>\n"
+ },
+ {
   "slug": "flood-fill",
   "lang": "cpp",
   "code": "class Solution {\n\npublic:\n    void dfs (int i,int j,int rows, int cols, vector<vector<int>>& image , int sourceColor,int color) {\n        if(i<0 || i>= rows || j<0 || j>= cols || image[i][j] != sourceColor)\n            return;\n        image[i][j] = color;\n        dfs(i+1,j,rows,cols,image,sourceColor,color);\n        dfs(i-1,j,rows,cols,image,sourceColor,color);\n        dfs(i,j+1,rows,cols,image,sourceColor,color);\n        dfs(i,j-1,rows,cols,image,sourceColor,color);\n    }\n\npublic:\n    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {\n        int rows = image.size();\n        int cols = image[0].size();\n        int sourceColor = image[sr][sc];\n        \n\n        if(sourceColor == color){\n            return image;\n        }\n        \n        dfs(sr,sc,rows,cols,image,sourceColor,color);\n\n        return image;\n    }\n};",
@@ -2146,6 +2224,36 @@
   "content": "<p>Given an integer array <code>nums</code> sorted in <strong>non-decreasing</strong> order, return <em>an array of <strong>the squares of each number</strong> sorted in non-decreasing order</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [-4,-1,0,3,10]\n<strong>Output:</strong> [0,1,9,16,100]\n<strong>Explanation:</strong> After squaring, the array becomes [16,1,0,9,100].\nAfter sorting, it becomes [0,1,9,16,100].\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [-7,-3,2,3,11]\n<strong>Output:</strong> [4,9,9,49,121]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code><span>1 &lt;= nums.length &lt;= </span>10<sup>4</sup></code></li>\n\t<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>\n\t<li><code>nums</code> is sorted in <strong>non-decreasing</strong> order.</li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Follow up:</strong> Squaring each element and sorting the new array is very trivial, could you find an <code>O(n)</code> solution using a different approach?"
  },
  {
+  "slug": "max-consecutive-ones-iii",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun longestOnes(nums: IntArray, k: Int): Int {\n        var maxLen = 0\n        var i = 0 \n        var j = 0\n        var switched = 0\n\n        while(j < nums.size){\n            if(nums[j] == 0 ){\n                switched++\n            }\n\n            while(switched > k){\n                if(nums[i] == 0){\n                    switched--\n                }\n                i++\n            }\n\n            val len = j - i + 1\n            maxLen = maxOf(len, maxLen)\n            j++\n        }\n\n        return maxLen\n    }\n}",
+  "timestamp": 1793016484,
+  "runtime": "5 ms",
+  "memory": "79.7 MB",
+  "questionFrontendId": "1004",
+  "title": "Max Consecutive Ones III",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   },
+   {
+    "name": "Prefix Sum",
+    "slug": "prefix-sum"
+   }
+  ],
+  "content": "<p>Given a binary array <code>nums</code> and an integer <code>k</code>, return <em>the maximum number of consecutive </em><code>1</code><em>&#39;s in the array if you can flip at most</em> <code>k</code> <code>0</code>&#39;s.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> [1,1,1,0,0,<u><strong>1</strong>,1,1,1,1,<strong>1</strong></u>]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3\n<strong>Output:</strong> 10\n<strong>Explanation:</strong> [0,0,<u>1,1,<strong>1</strong>,<strong>1</strong>,1,1,1,<strong>1</strong>,1,1</u>,0,0,0,1,1,1,1]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>nums[i]</code> is either 0 or 1.</li>\n\t<li><code>0 &lt;= k &lt;= nums.length</code></li>\n</ul>\n"
+ },
+ {
   "slug": "article-views-i",
   "lang": "mysql",
   "code": "select\ndistinct author_id as id\nfrom Views\nwhere author_id = viewer_id\norder by id",
@@ -2162,6 +2270,28 @@
    }
   ],
   "content": "<p>Table: <code>Views</code></p>\n\n<pre>\n+---------------+---------+\n| Column Name   | Type    |\n+---------------+---------+\n| article_id    | int     |\n| author_id     | int     |\n| viewer_id     | int     |\n| view_date     | date    |\n+---------------+---------+\nThere is no primary key (column with unique values) for this table, the table may have duplicate rows.\nEach row of this table indicates that some viewer viewed an article (written by some author) on some date. \nNote that equal author_id and viewer_id indicate the same person.\n</pre>\n\n<p>&nbsp;</p>\n\n<p>Write a solution to find all the authors that viewed at least one of their own articles.</p>\n\n<p>Return the result table sorted by <code>id</code> in ascending order.</p>\n\n<p>The result format is in the following example.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> \nViews table:\n+------------+-----------+-----------+------------+\n| article_id | author_id | viewer_id | view_date  |\n+------------+-----------+-----------+------------+\n| 1          | 3         | 5         | 2019-08-01 |\n| 1          | 3         | 6         | 2019-08-02 |\n| 2          | 7         | 7         | 2019-08-01 |\n| 2          | 7         | 6         | 2019-08-02 |\n| 4          | 7         | 1         | 2019-07-22 |\n| 3          | 4         | 4         | 2019-07-21 |\n| 3          | 4         | 4         | 2019-07-21 |\n+------------+-----------+-----------+------------+\n<strong>Output:</strong> \n+------+\n| id   |\n+------+\n| 4    |\n| 7    |\n+------+\n</pre>\n"
+ },
+ {
+  "slug": "number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun numOfSubarrays(arr: IntArray, k: Int, threshold: Int): Int {\n        var count = 0\n        var sum = arr.take(k).sum()\n        if(sum/k >= threshold ){\n            count++\n        }\n\n        for(i in k until arr.size){\n            val currSum = sum - arr[i-k] + arr[i]\n            if(currSum/k >= threshold){\n                count++ \n            } \n            sum = currSum\n        }\n\n        return count\n    }\n}",
+  "timestamp": 1792998740,
+  "runtime": "29 ms",
+  "memory": "84.9 MB",
+  "questionFrontendId": "1343",
+  "title": "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>Given an array of integers <code>arr</code> and two integers <code>k</code> and <code>threshold</code>, return <em>the number of sub-arrays of size </em><code>k</code><em> and average greater than or equal to </em><code>threshold</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> arr = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> The first 6 sub-arrays of size 3 have averages greater than 5. Note that averages are not integers.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= arr.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>1 &lt;= arr[i] &lt;= 10<sup>4</sup></code></li>\n\t<li><code>1 &lt;= k &lt;= arr.length</code></li>\n\t<li><code>0 &lt;= threshold &lt;= 10<sup>4</sup></code></li>\n</ul>\n"
  },
  {
   "slug": "find-the-distance-value-between-two-arrays",
