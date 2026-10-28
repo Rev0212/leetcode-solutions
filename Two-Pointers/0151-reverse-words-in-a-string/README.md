@@ -54,4 +54,5 @@
 
 | Language | File | Runtime | Memory | Accepted |
 |---|---|---|---|---|
+| kotlin | [solution.kt](solution.kt) | 23 ms | 48.7 MB | 2026-10-28 |
 | python | [solution.py](solution.py) | 17 ms | 12.2 MB | 2024-07-23 |
