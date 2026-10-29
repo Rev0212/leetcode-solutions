@@ -2224,6 +2224,28 @@
   "content": "<p>You have <code>n</code> jobs and <code>m</code> workers. You are given three arrays: <code>difficulty</code>, <code>profit</code>, and <code>worker</code> where:</p>\n\n<ul>\n\t<li><code>difficulty[i]</code> and <code>profit[i]</code> are the difficulty and the profit of the <code>i<sup>th</sup></code> job, and</li>\n\t<li><code>worker[j]</code> is the ability of <code>j<sup>th</sup></code> worker (i.e., the <code>j<sup>th</sup></code> worker can only complete a job with difficulty at most <code>worker[j]</code>).</li>\n</ul>\n\n<p>Every worker can be assigned <strong>at most one job</strong>, but one job can be <strong>completed multiple times</strong>.</p>\n\n<ul>\n\t<li>For example, if three workers attempt the same job that pays <code>$1</code>, then the total profit will be <code>$3</code>. If a worker cannot complete any job, their profit is <code>$0</code>.</li>\n</ul>\n\n<p>Return the maximum profit we can achieve after assigning the workers to the jobs.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]\n<strong>Output:</strong> 100\n<strong>Explanation:</strong> Workers are assigned jobs of difficulty [4,4,6,6] and they get a profit of [20,20,30,30] separately.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> difficulty = [85,47,57], profit = [24,66,99], worker = [40,25,25]\n<strong>Output:</strong> 0\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>n == difficulty.length</code></li>\n\t<li><code>n == profit.length</code></li>\n\t<li><code>m == worker.length</code></li>\n\t<li><code>1 &lt;= n, m &lt;= 10<sup>4</sup></code></li>\n\t<li><code>1 &lt;= difficulty[i], profit[i], worker[i] &lt;= 10<sup>5</sup></code></li>\n</ul>\n"
  },
  {
+  "slug": "koko-eating-bananas",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun minEatingSpeed(piles: IntArray, h: Int): Int {\n\n        var low = 1\n        var high = piles.maxOrNull()!!\n\n        while(low <= high){\n            val mid = low + (high - low) /2\n            var hours = 0L\n\n            for(pile in piles){\n                hours += (pile.toLong() + mid - 1) / mid\n            }\n\n            if(hours > h){\n                low = mid + 1\n            } else {\n                high = mid - 1\n            }\n        }\n\n        return low\n\n\n    }\n}",
+  "timestamp": 1793294925,
+  "runtime": "22 ms",
+  "memory": "62.7 MB",
+  "questionFrontendId": "875",
+  "title": "Koko Eating Bananas",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   }
+  ],
+  "content": "<p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the <code>i<sup>th</sup></code> pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p>\n\n<p>Koko can decide her bananas-per-hour eating speed of <code>k</code>. Each hour, she chooses some pile of bananas and eats <code>k</code> bananas from that pile. If the pile has less than <code>k</code> bananas, she eats all of them instead and will not eat any more bananas during this hour.</p>\n\n<p>Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.</p>\n\n<p>Return <em>the minimum integer</em> <code>k</code> <em>such that she can eat all the bananas within</em> <code>h</code> <em>hours</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> piles = [3,6,7,11], h = 8\n<strong>Output:</strong> 4\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> piles = [30,11,23,4,20], h = 5\n<strong>Output:</strong> 30\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> piles = [30,11,23,4,20], h = 6\n<strong>Output:</strong> 23\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= piles.length &lt;= 10<sup>4</sup></code></li>\n\t<li><code>piles.length &lt;= h &lt;= 10<sup>9</sup></code></li>\n\t<li><code>1 &lt;= piles[i] &lt;= 10<sup>9</sup></code></li>\n</ul>\n"
+ },
+ {
   "slug": "middle-of-the-linked-list",
   "lang": "kotlin",
   "code": "/**\n * Example:\n * var li = ListNode(5)\n * var v = li.`val`\n * Definition for singly-linked list.\n * class ListNode(var `val`: Int) {\n *     var next: ListNode? = null\n * }\n */\nclass Solution {\n    fun middleNode(head: ListNode?): ListNode? {\n        var slow = head\n        var fast = head\n\n        while(fast != null && fast?.next != null){\n            slow = slow?.next\n            fast = fast.next?.next\n        }\n\n        return slow\n        \n    }\n}",
