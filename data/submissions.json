@@ -1434,6 +1434,32 @@
   "content": "<p>Given an integer array <code>nums</code>, return <code>true</code> if any value appears <strong>at least twice</strong> in the array, and return <code>false</code> if every element is distinct.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums = [1,2,3,1]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>The element 1 occurs at the indices 0 and 3.</p>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums = [1,2,3,4]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">false</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>All elements are distinct.</p>\n</div>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">nums = [1,1,1,3,3,4,3,2,4,2]</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">true</span></p>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>\n</ul>\n"
  },
  {
+  "slug": "contains-duplicate-ii",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun containsNearbyDuplicate(nums: IntArray, k: Int): Boolean {\n        var i = 0 \n        val set = HashSet<Int>()\n\n        while( i < nums.size){\n            if(i > k){\n                set.remove(nums[i-k-1])\n            }\n\n            if(nums[i] in set){\n                return true\n            }\n\n            set.add(nums[i])\n\n            i++ \n        }\n\n        return false\n    }\n}",
+  "timestamp": 1793286665,
+  "runtime": "60 ms",
+  "memory": "161.1 MB",
+  "questionFrontendId": "219",
+  "title": "Contains Duplicate II",
+  "difficulty": "Easy",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Hash Table",
+    "slug": "hash-table"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> <em>if there are two <strong>distinct indices</strong> </em><code>i</code><em> and </em><code>j</code><em> in the array such that </em><code>nums[i] == nums[j]</code><em> and </em><code>abs(i - j) &lt;= k</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,2,3,1], k = 3\n<strong>Output:</strong> true\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,0,1,1], k = 1\n<strong>Output:</strong> true\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,2,3,1,2,3], k = 2\n<strong>Output:</strong> false\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>0 &lt;= k &lt;= 10<sup>5</sup></code></li>\n</ul>\n"
+ },
+ {
   "slug": "majority-element-ii",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    vector<int> majorityElement(vector<int>& nums) {\n        int el1 = INT_MIN;\n        int el2 = INT_MIN;\n        int cnt1 = 0,cnt2 = 0;\n        int n = nums.size();\n        int target = n/3;\n        for(int i=0;i<n;i++){\n            if(cnt1 == 0 && el2 != nums[i] ){\n                el1 = nums[i];\n                cnt1++;\n            } \n            else if(cnt2 == 0 && el1 != nums[i]){\n                el2 = nums[i];\n                cnt2++;\n            }\n            else if(nums[i] == el1){\n                cnt1++;\n            }\n            else if(nums[i] == el2){\n                cnt2++;\n            }\n            else{\n            cnt1--;\n            cnt2--;\n            }\n        }\n        vector<int> ans;\n\n        cnt1 = cnt2 = 0;\n        for (int num : nums) {\n            if (num == el1) cnt1++;\n            else if (num == el2) cnt2++;\n        }\n        if (cnt1 > n / 3) ans.push_back(el1);\n        if (cnt2 > n / 3) ans.push_back(el2);\n\n        return ans;\n    }\n};",
@@ -2276,6 +2302,28 @@
   "content": "<p>Given a binary array <code>nums</code> and an integer <code>k</code>, return <em>the maximum number of consecutive </em><code>1</code><em>&#39;s in the array if you can flip at most</em> <code>k</code> <code>0</code>&#39;s.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> [1,1,1,0,0,<u><strong>1</strong>,1,1,1,1,<strong>1</strong></u>]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3\n<strong>Output:</strong> 10\n<strong>Explanation:</strong> [0,0,<u>1,1,<strong>1</strong>,<strong>1</strong>,1,1,1,<strong>1</strong>,1,1</u>,0,0,0,1,1,1,1]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>nums[i]</code> is either 0 or 1.</li>\n\t<li><code>0 &lt;= k &lt;= nums.length</code></li>\n</ul>\n"
  },
  {
+  "slug": "grumpy-bookstore-owner",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun maxSatisfied(customers: IntArray, grumpy: IntArray, minutes: Int): Int {\n        \n    var statisfied = 0\n\n    for(i in 0 until customers.size){\n        if(grumpy[i] == 0){\n            statisfied += customers[i]\n        }        \n    }\n\n    var extra = 0\n\n    for(i in 0 until minutes){\n        if(grumpy[i] == 1){\n            extra += customers[i]\n        }\n    }\n\n    var maxExtra = extra\n\n    for(i in minutes until customers.size){\n        if(grumpy[i] == 1){\n            extra += customers[i]\n        }\n\n        if(grumpy[i - minutes] == 1){\n             extra -= customers[i - minutes]\n        }\n\n        maxExtra = maxOf(extra,maxExtra)\n    }\n\n    return statisfied + maxExtra\n\n    }\n}",
+  "timestamp": 1793278294,
+  "runtime": "4 ms",
+  "memory": "63.2 MB",
+  "questionFrontendId": "1052",
+  "title": "Grumpy Bookstore Owner",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>There is a bookstore owner that has a store open for <code>n</code> minutes. You are given an integer array <code>customers</code> of length <code>n</code> where <code>customers[i]</code> is the number of the customers that enter the store at the start of the <code>i<sup>th</sup></code> minute and all those customers leave after the end of that minute.</p>\n\n<p>During certain minutes, the bookstore owner is grumpy. You are given a binary array grumpy where <code>grumpy[i]</code> is <code>1</code> if the bookstore owner is grumpy during the <code>i<sup>th</sup></code> minute, and is <code>0</code> otherwise.</p>\n\n<p>When the bookstore owner is grumpy, the customers entering during that minute are not <strong>satisfied</strong>. Otherwise, they are satisfied.</p>\n\n<p>The bookstore owner knows a secret technique to remain <strong>not grumpy</strong> for <code>minutes</code> consecutive minutes, but this technique can only be used <strong>once</strong>.</p>\n\n<p>Return the <strong>maximum</strong> number of customers that can be <em>satisfied</em> throughout the day.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], minutes = 3</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">16</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>The bookstore owner keeps themselves not grumpy for the last 3 minutes.</p>\n\n<p>The maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 16.</p>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">customers = [1], grumpy = [0], minutes = 1</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">1</span></p>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>n == customers.length == grumpy.length</code></li>\n\t<li><code>1 &lt;= minutes &lt;= n &lt;= 2 * 10<sup>4</sup></code></li>\n\t<li><code>0 &lt;= customers[i] &lt;= 1000</code></li>\n\t<li><code>grumpy[i]</code> is either <code>0</code> or <code>1</code>.</li>\n</ul>\n"
+ },
+ {
   "slug": "article-views-i",
   "lang": "mysql",
   "code": "select\ndistinct author_id as id\nfrom Views\nwhere author_id = viewer_id\norder by id",
@@ -2344,6 +2392,28 @@
    }
   ],
   "content": "<p>Given two integer arrays <code>arr1</code> and <code>arr2</code>, and the integer <code>d</code>, <em>return the distance value between the two arrays</em>.</p>\n\n<p>The distance value is defined as the number of elements <code>arr1[i]</code> such that there is not any element <code>arr2[j]</code> where <code>|arr1[i]-arr2[j]| &lt;= d</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> arr1 = [4,5,8], arr2 = [10,9,1,8], d = 2\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> \nFor arr1[0]=4 we have: \n|4-10|=6 &gt; d=2 \n|4-9|=5 &gt; d=2 \n|4-1|=3 &gt; d=2 \n|4-8|=4 &gt; d=2 \nFor arr1[1]=5 we have: \n|5-10|=5 &gt; d=2 \n|5-9|=4 &gt; d=2 \n|5-1|=4 &gt; d=2 \n|5-8|=3 &gt; d=2\nFor arr1[2]=8 we have:\n<strong>|8-10|=2 &lt;= d=2</strong>\n<strong>|8-9|=1 &lt;= d=2</strong>\n|8-1|=7 &gt; d=2\n<strong>|8-8|=0 &lt;= d=2</strong>\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> arr1 = [1,4,2,3], arr2 = [-4,-3,6,10,20,30], d = 3\n<strong>Output:</strong> 2\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> arr1 = [2,1,100,3], arr2 = [-5,-2,10,-3,7], d = 6\n<strong>Output:</strong> 1\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= arr1.length, arr2.length &lt;= 500</code></li>\n\t<li><code>-1000 &lt;= arr1[i], arr2[j] &lt;= 1000</code></li>\n\t<li><code>0 &lt;= d &lt;= 100</code></li>\n</ul>\n"
+ },
+ {
+  "slug": "maximum-number-of-vowels-in-a-substring-of-given-length",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun maxVowels(s: String, k: Int): Int {\n        var currCount = 0\n        var i = 0\n\n        while(i < k){\n            if(isVowel(s[i])){\n                currCount++\n            } \n            i++\n        }\n\n        var maxCount = currCount\n        i = k\n\n        while(i < s.length){\n            if(isVowel(s[i])){\n                currCount++\n            }\n\n            if(isVowel(s[i-k])){\n                currCount--\n            }\n\n            maxCount = maxOf(currCount, maxCount)\n\n            i++\n        } \n\n        return maxCount\n    }\n\n    fun isVowel(c: Char): Boolean{\n        val set = setOf('a', 'e', 'i', 'o', 'u')\n        \n        return c in set\n    }\n}",
+  "timestamp": 1793288756,
+  "runtime": "180 ms",
+  "memory": "202.7 MB",
+  "questionFrontendId": "1456",
+  "title": "Maximum Number of Vowels in a Substring of Given Length",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "String",
+    "slug": "string"
+   },
+   {
+    "name": "Sliding Window",
+    "slug": "sliding-window"
+   }
+  ],
+  "content": "<p>Given a string <code>s</code> and an integer <code>k</code>, return <em>the maximum number of vowel letters in any substring of </em><code>s</code><em> with length </em><code>k</code>.</p>\n\n<p><strong>Vowel letters</strong> in English are <code>&#39;a&#39;</code>, <code>&#39;e&#39;</code>, <code>&#39;i&#39;</code>, <code>&#39;o&#39;</code>, and <code>&#39;u&#39;</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;abciiidef&quot;, k = 3\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The substring &quot;iii&quot; contains 3 vowel letters.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;aeiou&quot;, k = 2\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> Any substring of length 2 contains 2 vowels.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;leetcode&quot;, k = 3\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> &quot;lee&quot;, &quot;eet&quot; and &quot;ode&quot; contain 2 vowels.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>s</code> consists of lowercase English letters.</li>\n\t<li><code>1 &lt;= k &lt;= s.length</code></li>\n</ul>\n"
  },
  {
   "slug": "merge-in-between-linked-lists",
