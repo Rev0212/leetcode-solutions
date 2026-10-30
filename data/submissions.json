@@ -2124,6 +2124,32 @@
   "content": "<p>You are given an image represented by an <code>m x n</code> grid of integers <code>image</code>, where <code>image[i][j]</code> represents the pixel value of the image. You are also given three integers <code>sr</code>, <code>sc</code>, and <code>color</code>. Your task is to perform a <strong>flood fill</strong> on the image starting from the pixel <code>image[sr][sc]</code>.</p>\n\n<p>To perform a <strong>flood fill</strong>:</p>\n\n<ol>\n\t<li>Begin with the starting pixel and change its color to <code>color</code>.</li>\n\t<li>Perform the same process for each pixel that is <strong>directly adjacent</strong> (pixels that share a side with the original pixel, either horizontally or vertically) and shares the <strong>same color</strong> as the starting pixel.</li>\n\t<li>Keep <strong>repeating</strong> this process by checking neighboring pixels of the <em>updated</em> pixels&nbsp;and modifying their color if it matches the original color of the starting pixel.</li>\n\t<li>The process <strong>stops</strong> when there are <strong>no more</strong> adjacent pixels of the original color to update.</li>\n</ol>\n\n<p>Return the <strong>modified</strong> image after performing the flood fill.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">[[2,2,2],[2,2,0],[2,0,1]]</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p><img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/06/01/flood1-grid.jpg\" style=\"width: 613px; height: 253px;\" /></p>\n\n<p>From the center of the image with position <code>(sr, sc) = (1, 1)</code> (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.</p>\n\n<p>Note the bottom corner is <strong>not</strong> colored 2, because it is not horizontally or vertically connected to the starting pixel.</p>\n</div>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<div class=\"example-block\">\n<p><strong>Input:</strong> <span class=\"example-io\">image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0</span></p>\n\n<p><strong>Output:</strong> <span class=\"example-io\">[[0,0,0],[0,0,0]]</span></p>\n\n<p><strong>Explanation:</strong></p>\n\n<p>The starting pixel is already colored with 0, which is the same as the target color. Therefore, no changes are made to the image.</p>\n</div>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>m == image.length</code></li>\n\t<li><code>n == image[i].length</code></li>\n\t<li><code>1 &lt;= m, n &lt;= 50</code></li>\n\t<li><code>0 &lt;= image[i][j], color &lt; 2<sup>16</sup></code></li>\n\t<li><code>0 &lt;= sr &lt; m</code></li>\n\t<li><code>0 &lt;= sc &lt; n</code></li>\n</ul>\n"
  },
  {
+  "slug": "daily-temperatures",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun dailyTemperatures(temperatures: IntArray): IntArray {\n        val arr = IntArray(temperatures.size)\n        val stack = ArrayDeque<Int>()\n\n        for (i in temperatures.indices){\n            while(!stack.isEmpty()  &&\n             temperatures[stack.last()] < temperatures[i]\n             ){\n               val top = stack.last()\n               arr[top] = i - top\n               stack.removeLast()\n            }\n            stack.addLast(i)\n        }\n\n        return arr\n     \n    }\n}",
+  "timestamp": 1793373486,
+  "runtime": "51 ms",
+  "memory": "172.6 MB",
+  "questionFrontendId": "739",
+  "title": "Daily Temperatures",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Stack",
+    "slug": "stack"
+   },
+   {
+    "name": "Monotonic Stack",
+    "slug": "monotonic-stack"
+   }
+  ],
+  "content": "<p>Given an array of integers <code>temperatures</code> represents the daily temperatures, return <em>an array</em> <code>answer</code> <em>such that</em> <code>answer[i]</code> <em>is the number of days you have to wait after the</em> <code>i<sup>th</sup></code> <em>day to get a warmer temperature</em>. If there is no future day for which this is possible, keep <code>answer[i] == 0</code> instead.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<pre><strong>Input:</strong> temperatures = [73,74,75,71,69,72,76,73]\n<strong>Output:</strong> [1,1,4,2,1,1,0,0]\n</pre><p><strong class=\"example\">Example 2:</strong></p>\n<pre><strong>Input:</strong> temperatures = [30,40,50,60]\n<strong>Output:</strong> [1,1,1,0]\n</pre><p><strong class=\"example\">Example 3:</strong></p>\n<pre><strong>Input:</strong> temperatures = [30,60,90]\n<strong>Output:</strong> [1,1,0]\n</pre>\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;=&nbsp;temperatures.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>30 &lt;=&nbsp;temperatures[i] &lt;= 100</code></li>\n</ul>\n"
+ },
+ {
   "slug": "jewels-and-stones",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    int numJewelsInStones(string jewels, string stones)\n    {\n    unordered_map<char, int> stonemap;\n    for(int i=0;i<stones.size();i++)\n    {\n        stonemap[stones[i]]++;\n    }\n    int jewelCount = 0;\n        for(int i = 0; i < jewels.size(); i++) \n        {\n            if(stonemap.find(jewels[i]) != stonemap.end()) \n            {\n                jewelCount += stonemap[jewels[i]];\n            }\n        }\n         return jewelCount; \n        }\n};",
@@ -2324,6 +2350,28 @@
   "content": "<p>Given a binary array <code>nums</code> and an integer <code>k</code>, return <em>the maximum number of consecutive </em><code>1</code><em>&#39;s in the array if you can flip at most</em> <code>k</code> <code>0</code>&#39;s.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> [1,1,1,0,0,<u><strong>1</strong>,1,1,1,1,<strong>1</strong></u>]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3\n<strong>Output:</strong> 10\n<strong>Explanation:</strong> [0,0,<u>1,1,<strong>1</strong>,<strong>1</strong>,1,1,1,<strong>1</strong>,1,1</u>,0,0,0,1,1,1,1]\nBolded numbers were flipped from 0 to 1. The longest subarray is underlined.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>nums[i]</code> is either 0 or 1.</li>\n\t<li><code>0 &lt;= k &lt;= nums.length</code></li>\n</ul>\n"
  },
  {
+  "slug": "capacity-to-ship-packages-within-d-days",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun shipWithinDays(weights: IntArray, days: Int): Int {\n        var low = weights.maxOrNull()!!\n        var high = weights.sum()\n\n        var minCapacity = Int.MAX_VALUE\n        \n\n        while(low <= high){\n            val mid = low + (high-low) / 2\n            var daysReq = 1\n            var capacity = 0\n\n            for(i in weights){\n                if(capacity + i > mid){\n                    daysReq++\n                    capacity = 0 \n                }\n                capacity += i\n            }\n\n            if(daysReq <= days){\n                 minCapacity = minOf(minCapacity, mid)\n            }\n\n            if(daysReq > days){\n                low = mid + 1\n            } else {\n                high = mid - 1\n            }\n        }\n\n        return minCapacity \n    }\n}",
+  "timestamp": 1793345632,
+  "runtime": "28 ms",
+  "memory": "66 MB",
+  "questionFrontendId": "1011",
+  "title": "Capacity To Ship Packages Within D Days",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   }
+  ],
+  "content": "<p>A conveyor belt has packages that must be shipped from one port to another within <code>days</code> days.</p>\n\n<p>The <code>i<sup>th</sup></code> package on the conveyor belt has a weight of <code>weights[i]</code>. Each day, we load the ship with packages on the conveyor belt (in the order given by <code>weights</code>). We may not load more weight than the maximum weight capacity of the ship.</p>\n\n<p>Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within <code>days</code> days.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> weights = [1,2,3,4,5,6,7,8,9,10], days = 5\n<strong>Output:</strong> 15\n<strong>Explanation:</strong> A ship capacity of 15 is the minimum to ship all the packages in 5 days like this:\n1st day: 1, 2, 3, 4, 5\n2nd day: 6, 7\n3rd day: 8\n4th day: 9\n5th day: 10\n\nNote that the cargo must be shipped in the order given, so using a ship of capacity 14 and splitting the packages into parts like (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) is not allowed.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> weights = [3,2,2,4,1,4], days = 3\n<strong>Output:</strong> 6\n<strong>Explanation:</strong> A ship capacity of 6 is the minimum to ship all the packages in 3 days like this:\n1st day: 3, 2\n2nd day: 2, 4\n3rd day: 1, 4\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> weights = [1,2,3,1,1], days = 4\n<strong>Output:</strong> 3\n<strong>Explanation:</strong>\n1st day: 1\n2nd day: 2\n3rd day: 3\n4th day: 1, 1\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= days &lt;= weights.length &lt;= 5 * 10<sup>4</sup></code></li>\n\t<li><code>1 &lt;= weights[i] &lt;= 500</code></li>\n</ul>\n"
+ },
+ {
   "slug": "grumpy-bookstore-owner",
   "lang": "kotlin",
   "code": "class Solution {\n    fun maxSatisfied(customers: IntArray, grumpy: IntArray, minutes: Int): Int {\n        \n    var statisfied = 0\n\n    for(i in 0 until customers.size){\n        if(grumpy[i] == 0){\n            statisfied += customers[i]\n        }        \n    }\n\n    var extra = 0\n\n    for(i in 0 until minutes){\n        if(grumpy[i] == 1){\n            extra += customers[i]\n        }\n    }\n\n    var maxExtra = extra\n\n    for(i in minutes until customers.size){\n        if(grumpy[i] == 1){\n            extra += customers[i]\n        }\n\n        if(grumpy[i - minutes] == 1){\n             extra -= customers[i - minutes]\n        }\n\n        maxExtra = maxOf(extra,maxExtra)\n    }\n\n    return statisfied + maxExtra\n\n    }\n}",
@@ -2362,6 +2410,28 @@
    }
   ],
   "content": "<p>Table: <code>Views</code></p>\n\n<pre>\n+---------------+---------+\n| Column Name   | Type    |\n+---------------+---------+\n| article_id    | int     |\n| author_id     | int     |\n| viewer_id     | int     |\n| view_date     | date    |\n+---------------+---------+\nThere is no primary key (column with unique values) for this table, the table may have duplicate rows.\nEach row of this table indicates that some viewer viewed an article (written by some author) on some date. \nNote that equal author_id and viewer_id indicate the same person.\n</pre>\n\n<p>&nbsp;</p>\n\n<p>Write a solution to find all the authors that viewed at least one of their own articles.</p>\n\n<p>Return the result table sorted by <code>id</code> in ascending order.</p>\n\n<p>The result format is in the following example.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> \nViews table:\n+------------+-----------+-----------+------------+\n| article_id | author_id | viewer_id | view_date  |\n+------------+-----------+-----------+------------+\n| 1          | 3         | 5         | 2019-08-01 |\n| 1          | 3         | 6         | 2019-08-02 |\n| 2          | 7         | 7         | 2019-08-01 |\n| 2          | 7         | 6         | 2019-08-02 |\n| 4          | 7         | 1         | 2019-07-22 |\n| 3          | 4         | 4         | 2019-07-21 |\n| 3          | 4         | 4         | 2019-07-21 |\n+------------+-----------+-----------+------------+\n<strong>Output:</strong> \n+------+\n| id   |\n+------+\n| 4    |\n| 7    |\n+------+\n</pre>\n"
+ },
+ {
+  "slug": "find-the-smallest-divisor-given-a-threshold",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun smallestDivisor(nums: IntArray, threshold: Int): Int {\n        var low = 1\n        var high = nums.maxOrNull()!!\n\n        var minDivisor = Int.MAX_VALUE\n\n        while(low <= high){\n            val mid = low + (high-low)/2\n            var sum = 0\n\n            for(i in nums){\n                val res = (i + mid - 1)/ mid\n                sum += res\n            }\n\n            if(sum <= threshold){\n                minDivisor = minOf(minDivisor, mid)\n            }\n\n            if (sum <= threshold){\n                high = mid - 1\n            } else {\n                low = mid + 1\n            }\n        }\n\n        return minDivisor\n    }\n}",
+  "timestamp": 1793348843,
+  "runtime": "20 ms",
+  "memory": "62.9 MB",
+  "questionFrontendId": "1283",
+  "title": "Find the Smallest Divisor Given a Threshold",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   }
+  ],
+  "content": "<p>Given an array of integers <code>nums</code> and an integer <code>threshold</code>, we will choose a positive integer <code>divisor</code>, divide all the array by it, and sum the division&#39;s result. Find the <strong>smallest</strong> <code>divisor</code> such that the result mentioned above is less than or equal to <code>threshold</code>.</p>\n\n<p>Each result of the division is rounded to the nearest integer greater than or equal to that element. (For example: <code>7/3 = 3</code> and <code>10/2 = 5</code>).</p>\n\n<p>The test cases are generated so&nbsp;that there will be an answer.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,2,5,9], threshold = 6\n<strong>Output:</strong> 5\n<strong>Explanation:</strong> We can get a sum to 17 (1+2+5+9) if the divisor is 1. \nIf the divisor is 4 we can get a sum of 7 (1+1+2+3) and if the divisor is 5 the sum will be 5 (1+1+1+2). \n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [44,22,33,11,1], threshold = 5\n<strong>Output:</strong> 44\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup>4</sup></code></li>\n\t<li><code>1 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>\n\t<li><code>nums.length &lt;= threshold &lt;= 10<sup>6</sup></code></li>\n</ul>\n"
  },
  {
   "slug": "number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
@@ -2436,6 +2506,54 @@
    }
   ],
   "content": "<p>Given a string <code>s</code> and an integer <code>k</code>, return <em>the maximum number of vowel letters in any substring of </em><code>s</code><em> with length </em><code>k</code>.</p>\n\n<p><strong>Vowel letters</strong> in English are <code>&#39;a&#39;</code>, <code>&#39;e&#39;</code>, <code>&#39;i&#39;</code>, <code>&#39;o&#39;</code>, and <code>&#39;u&#39;</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;abciiidef&quot;, k = 3\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The substring &quot;iii&quot; contains 3 vowel letters.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;aeiou&quot;, k = 2\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> Any substring of length 2 contains 2 vowels.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;leetcode&quot;, k = 3\n<strong>Output:</strong> 2\n<strong>Explanation:</strong> &quot;lee&quot;, &quot;eet&quot; and &quot;ode&quot; contain 2 vowels.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>s</code> consists of lowercase English letters.</li>\n\t<li><code>1 &lt;= k &lt;= s.length</code></li>\n</ul>\n"
+ },
+ {
+  "slug": "minimum-number-of-days-to-make-m-bouquets",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun minDays(bloomDay: IntArray, m: Int, k: Int): Int {\n        if (bloomDay.size.toLong() < m.toLong() * k.toLong()){\n            return - 1\n        }\n\n        var low = bloomDay.minOrNull()!!\n        var high = bloomDay.maxOrNull()!!\n\n        var total = 0\n    \n        while(low <= high){\n            var adj = 0\n            val mid = low + (high - low)/2\n\n            for(i in bloomDay){\n                if(i <= mid){\n                    adj++\n                } else {\n                    adj = 0\n                }\n                if(adj == k){\n                   total++ \n                   adj = 0\n                }\n            }\n\n\n            if(total >= m){\n                high = mid - 1\n            } else {\n                low = mid + 1\n            }\n\n            total = 0\n        }\n\n        return low\n\n    }\n}",
+  "timestamp": 1793347697,
+  "runtime": "33 ms",
+  "memory": "93.5 MB",
+  "questionFrontendId": "1482",
+  "title": "Minimum Number of Days to Make m Bouquets",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   }
+  ],
+  "content": "<p>You are given an integer array <code>bloomDay</code>, an integer <code>m</code> and an integer <code>k</code>.</p>\n\n<p>You want to make <code>m</code> bouquets. To make a bouquet, you need to use <code>k</code> <strong>adjacent flowers</strong> from the garden.</p>\n\n<p>The garden consists of <code>n</code> flowers, the <code>i<sup>th</sup></code> flower will bloom in the <code>bloomDay[i]</code> and then can be used in <strong>exactly one</strong> bouquet.</p>\n\n<p>Return the <strong>minimum</strong> number of days you need to wait to be able to make m bouquets from the garden. If it is impossible to make m bouquets return -1.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> bloomDay = [1,10,3,10,2], m = 3, k = 1\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> Let us see what happened in the first three days. x means flower bloomed and _ means flower did not bloom in the garden.\nWe need 3 bouquets each should contain 1 flower.\nAfter day 1: [x, _, _, _, _]   // we can only make one bouquet.\nAfter day 2: [x, _, _, _, x]   // we can only make two bouquets.\nAfter day 3: [x, _, x, _, x]   // we can make 3 bouquets. The answer is 3.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> bloomDay = [1,10,3,10,2], m = 3, k = 2\n<strong>Output:</strong> -1\n<strong>Explanation:</strong> We need 3 bouquets each has 2 flowers, that means we need 6 flowers. We only have 5 flowers so it is impossible to get the needed bouquets and we return -1.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> bloomDay = [7,7,7,7,12,7,7], m = 2, k = 3\n<strong>Output:</strong> 12\n<strong>Explanation:</strong> We need 2 bouquets each should have 3 flowers.\nHere is the garden after the 7 and 12 days:\nAfter day 7: [x, x, x, x, _, x, x]\nWe can make one bouquet of the first three flowers that bloomed. We cannot make another bouquet from the last three flowers that bloomed because they are not adjacent.\nAfter day 12: [x, x, x, x, x, x, x]\nIt is obvious that we can make two bouquets in different ways.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>bloomDay.length == n</code></li>\n\t<li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>\n\t<li><code>1 &lt;= bloomDay[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>1 &lt;= m &lt;= 10<sup>6</sup></code></li>\n\t<li><code>1 &lt;= k &lt;= n</code></li>\n</ul>\n"
+ },
+ {
+  "slug": "magnetic-force-between-two-balls",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun maxDistance(position: IntArray, m: Int): Int {\n         position.sort()\n         var low = 1 \n         var high = position.last() - position.first() \n\n        while(low <= high){\n            var canPlace = false \n            var placed = 1\n            var lastPlaced = position[0]\n            val mid = low + (high - low)/2\n            for(i in 1 until position.size){\n                if(position[i] - lastPlaced >= mid){\n                    lastPlaced = position[i]\n                    placed++\n                }\n\n                if(placed == m){\n                    canPlace = true\n                    break\n                }\n            }\n            if(canPlace){\n                low = mid + 1\n            } else {\n                high = mid - 1 \n            }\n        }\n\n        return high\n    }\n}",
+  "timestamp": 1793355140,
+  "runtime": "66 ms",
+  "memory": "86.2 MB",
+  "questionFrontendId": "1552",
+  "title": "Magnetic Force Between Two Balls",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Binary Search",
+    "slug": "binary-search"
+   },
+   {
+    "name": "Sorting",
+    "slug": "sorting"
+   }
+  ],
+  "content": "<p>In the universe Earth C-137, Rick discovered a special form of magnetic force between two balls if they are put in his new invented basket. Rick has <code>n</code> empty baskets, the <code>i<sup>th</sup></code> basket is at <code>position[i]</code>, Morty has <code>m</code> balls and needs to distribute the balls into the baskets such that the <strong>minimum magnetic force</strong> between any two balls is <strong>maximum</strong>.</p>\n\n<p>Rick stated that magnetic force between two different balls at positions <code>x</code> and <code>y</code> is <code>|x - y|</code>.</p>\n\n<p>Given the integer array <code>position</code> and the integer <code>m</code>. Return <em>the required force</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/08/11/q3v1.jpg\" style=\"width: 562px; height: 195px;\" />\n<pre>\n<strong>Input:</strong> position = [1,2,3,4,7], m = 3\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> Distributing the 3 balls into baskets 1, 4 and 7 will make the magnetic force between ball pairs [3, 3, 6]. The minimum magnetic force is 3. We cannot achieve a larger minimum magnetic force than 3.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> position = [5,4,3,2,1,1000000000], m = 2\n<strong>Output:</strong> 999999999\n<strong>Explanation:</strong> We can use baskets 1 and 1000000000.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>n == position.length</code></li>\n\t<li><code>2 &lt;= n &lt;= 10<sup>5</sup></code></li>\n\t<li><code>1 &lt;= position[i] &lt;= 10<sup>9</sup></code></li>\n\t<li>All integers in <code>position</code> are <strong>distinct</strong>.</li>\n\t<li><code>2 &lt;= m &lt;= position.length</code></li>\n</ul>\n"
  },
  {
   "slug": "merge-in-between-linked-lists",
