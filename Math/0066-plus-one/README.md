@@ -55,3 +55,4 @@ Thus, the result should be [1,0].
 | Language | File | Runtime | Memory | Accepted |
 |---|---|---|---|---|
 | cpp | [solution.cpp](solution.cpp) | 0 ms | 11.6 MB | 2025-01-26 |
+| kotlin | [solution.kt](solution.kt) | 8 ms | 46.8 MB | 2026-10-31 |
