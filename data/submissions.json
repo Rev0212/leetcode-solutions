@@ -1924,6 +1924,28 @@
   "content": "<p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>\n\n<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/04/09/sumii-linked-list.jpg\" style=\"width: 523px; height: 342px;\" />\n<pre>\n<strong>Input:</strong> l1 = [7,2,4,3], l2 = [5,6,4]\n<strong>Output:</strong> [7,8,0,7]\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]\n<strong>Output:</strong> [8,0,7]\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [0], l2 = [0]\n<strong>Output:</strong> [0]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>\n\t<li><code>0 &lt;= Node.val &lt;= 9</code></li>\n\t<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>\n</ul>\n\n<p>&nbsp;</p>\n<p><strong>Follow up:</strong>&nbsp;Could you solve it without reversing the input lists?</p>\n"
  },
  {
+  "slug": "minimum-moves-to-equal-array-elements",
+  "lang": "kotlin",
+  "code": "class Solution {\n    fun minMoves(nums: IntArray): Int {\n        val min = nums.minOrNull()!!\n        var step = 0\n\n        for(i in nums){\n            if (i > min){\n                step += i - min \n            }\n        }\n\n        return step \n    }\n}",
+  "timestamp": 1793515665,
+  "runtime": "16 ms",
+  "memory": "63.2 MB",
+  "questionFrontendId": "453",
+  "title": "Minimum Moves to Equal Array Elements",
+  "difficulty": "Medium",
+  "topicTags": [
+   {
+    "name": "Array",
+    "slug": "array"
+   },
+   {
+    "name": "Math",
+    "slug": "math"
+   }
+  ],
+  "content": "<p>Given an integer array <code>nums</code> of size <code>n</code>, return <em>the minimum number of moves required to make all array elements equal</em>.</p>\n\n<p>In one move, you can increment <code>n - 1</code> elements of the array by <code>1</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,2,3]\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> Only three moves are needed (remember each move increments two elements):\n[1,2,3]  =&gt;  [2,3,3]  =&gt;  [3,4,3]  =&gt;  [4,4,4]\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [1,1,1]\n<strong>Output:</strong> 0\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>n == nums.length</code></li>\n\t<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>\n\t<li>The answer is guaranteed to fit in a <strong>32-bit</strong> integer.</li>\n</ul>\n"
+ },
+ {
   "slug": "max-consecutive-ones",
   "lang": "cpp",
   "code": "class Solution {\npublic:\n    int findMaxConsecutiveOnes(vector<int>& nums) {\n       int maxConsecutiveOnes = 0;\n        int currentConsecutiveOnes = 0;\n        \n        for (int i = 0; i < nums.size(); ++i) {\n            if (nums[i] == 1) {\n                currentConsecutiveOnes++;\n                maxConsecutiveOnes = max(maxConsecutiveOnes, currentConsecutiveOnes);\n            } else {\n                currentConsecutiveOnes = 0;\n            }\n        }\n        \n        return maxConsecutiveOnes;\n    }\n    \n};",
